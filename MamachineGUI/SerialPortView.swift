@@ -25,6 +25,8 @@ class SerialMan:NSObject, ObservableObject, ORSSerialPortDelegate {
             }
         }
     }
+    @Published var openPort:ORSSerialPort? = nil
+    
     @Published var portBuffer = ""
     
     func ports() -> [ORSSerialPort] {
@@ -53,14 +55,45 @@ class SerialMan:NSObject, ObservableObject, ORSSerialPortDelegate {
     func serialPortWasRemovedFromSystem(_ serialPort: ORSSerialPort) {
         print("\(serialPort.path) was removed")
     }
+    
+    func serialPortWasOpened(_ serialPort: ORSSerialPort) {
+        self.openPort = serialPort
+    }
+    
+    func serialPortWasClosed(_ serialPort: ORSSerialPort) {
+        self.openPort = nil
+    }
+
 }
 
 struct SerialPortView:View {
     @ObservedObject var serial = SerialMan.shared
 
+    var buttons: some View {
+        HStack {
+            
+            if let port = serial.selectedPort {
+                Button {
+                    port.baudRate = 115200
+                    port.open()
+                } label: {
+                    Text("Open Port")
+                }
+                .disabled(port.isOpen)
+                
+                Button {
+                    serial.selectedPort?.close()
+                } label: {
+                    Text("close Port")
+                }
+                .disabled(!port.isOpen)
+            }
+        }
+    }
+    
     var body: some View {
         VStack(alignment:.leading) {
-            Text("Serial Ports")
+            Text("Serial Monitor")
                 .font(.title)
             Group {
                 ForEach(serial.ports(), id:\.self) { t in
@@ -75,22 +108,7 @@ struct SerialPortView:View {
                     
                     
                 }
-                HStack {
-                    Text("Monitor")
-                    Button {
-                        serial.selectedPort?.baudRate = 115200
-                        serial.selectedPort?.open()
-                    } label: {
-                        Text("Open Port")
-                    }
-                    
-                    Button {
-                        serial.selectedPort?.close()
-                    } label: {
-                        Text("close Port")
-                    }
-
-                }
+                buttons
                 TextEditor(text: $serial.portBuffer)
                 Divider()
                 

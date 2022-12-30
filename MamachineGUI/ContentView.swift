@@ -485,18 +485,23 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack(alignment:.leading){
-            
-            ProjectListView(selectedProject: $selectedProject)
-//           pathPicker
-            SerialPortView()
-            Divider()
-           commands
-            Divider()
-           outputView
-            FSView(project: selectedProject)
-            EditorView()
+        HStack {
+            VStack {
+                ProjectListView(selectedProject: $selectedProject)
+    //           pathPicker
+                SerialPortView()
+                Divider()
+            }
+            VStack(alignment:.leading){
+                
+               commands
+                Divider()
+               outputView
+                FSView(project: selectedProject)
+                EditorView()
+            }
+            .padding()
         }
-        .padding()
+     
     }
 }
