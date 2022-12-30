@@ -1,0 +1,41 @@
+{
+  "pins" : [
+    {
+      "identity" : "codeeditorview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mchakravarty/CodeEditorView",
+      "state" : {
+        "revision" : "325759c1cc2873fd5eba0f8d4eedd0233ac9eca7",
+        "version" : "0.10.0"
+      }
+    },
+    {
+      "identity" : "fileorfolderpicker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jhoughjr/FileOrFolderPicker",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2f5a8aea7505b215429929ff926dfb4361a435cd"
+      }
+    },
+    {
+      "identity" : "orsserialport",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/armadsen/ORSSerialPort",
+      "state" : {
+        "revision" : "58a8cc454304e22280f184c2d2e25ecb3d5a74c5",
+        "version" : "2.1.0"
+      }
+    },
+    {
+      "identity" : "swiftslash",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tannerdsilva/SwiftSlash",
+      "state" : {
+        "revision" : "f2ad4e0b7c9ccd414987b6e8339bda02b5fb418e",
+        "version" : "3.3.1"
+      }
+    }
+  ],
+  "version" : 2
+}

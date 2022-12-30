@@ -1,0 +1,667 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D805E41D295B41CA0007C402 /* MamachineGUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D805E41C295B41CA0007C402 /* MamachineGUIApp.swift */; };
+		D805E41F295B41CA0007C402 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D805E41E295B41CA0007C402 /* ContentView.swift */; };
+		D805E421295B41CC0007C402 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D805E420295B41CC0007C402 /* Assets.xcassets */; };
+		D805E424295B41CC0007C402 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D805E423295B41CC0007C402 /* Preview Assets.xcassets */; };
+		D805E42F295B41CC0007C402 /* MamachineGUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D805E42E295B41CC0007C402 /* MamachineGUITests.swift */; };
+		D805E439295B41CC0007C402 /* MamachineGUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D805E438295B41CC0007C402 /* MamachineGUIUITests.swift */; };
+		D805E43B295B41CC0007C402 /* MamachineGUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D805E43A295B41CC0007C402 /* MamachineGUIUITestsLaunchTests.swift */; };
+		D805E44F295B59B40007C402 /* FilePicker in Frameworks */ = {isa = PBXBuildFile; productRef = D805E44E295B59B40007C402 /* FilePicker */; };
+		D805E451295B69250007C402 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D805E450295B69250007C402 /* Runner.swift */; };
+		D8A28D03295F61B700361D85 /* ORSSerial in Frameworks */ = {isa = PBXBuildFile; productRef = D8A28D02295F61B700361D85 /* ORSSerial */; };
+		D8A28D05295F61F700361D85 /* SerialPortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A28D04295F61F700361D85 /* SerialPortView.swift */; };
+		D8A28D08295F84AC00361D85 /* CodeEditorView in Frameworks */ = {isa = PBXBuildFile; productRef = D8A28D07295F84AC00361D85 /* CodeEditorView */; };
+		D8C66915295C9C32006949BE /* SwiftSlash in Frameworks */ = {isa = PBXBuildFile; productRef = D8C66914295C9C32006949BE /* SwiftSlash */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D805E42B295B41CC0007C402 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D805E411295B41CA0007C402 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D805E418295B41CA0007C402;
+			remoteInfo = MamachineGUI;
+		};
+		D805E435295B41CC0007C402 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D805E411295B41CA0007C402 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D805E418295B41CA0007C402;
+			remoteInfo = MamachineGUI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D805E419295B41CA0007C402 /* MamachineGUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MamachineGUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D805E41C295B41CA0007C402 /* MamachineGUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MamachineGUIApp.swift; sourceTree = "<group>"; };
+		D805E41E295B41CA0007C402 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D805E420295B41CC0007C402 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D805E423295B41CC0007C402 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D805E425295B41CC0007C402 /* MamachineGUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MamachineGUI.entitlements; sourceTree = "<group>"; };
+		D805E42A295B41CC0007C402 /* MamachineGUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MamachineGUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D805E42E295B41CC0007C402 /* MamachineGUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MamachineGUITests.swift; sourceTree = "<group>"; };
+		D805E434295B41CC0007C402 /* MamachineGUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MamachineGUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D805E438295B41CC0007C402 /* MamachineGUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MamachineGUIUITests.swift; sourceTree = "<group>"; };
+		D805E43A295B41CC0007C402 /* MamachineGUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MamachineGUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D805E450295B69250007C402 /* Runner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
+		D8A28D04295F61F700361D85 /* SerialPortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialPortView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D805E416295B41CA0007C402 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8A28D03295F61B700361D85 /* ORSSerial in Frameworks */,
+				D8C66915295C9C32006949BE /* SwiftSlash in Frameworks */,
+				D805E44F295B59B40007C402 /* FilePicker in Frameworks */,
+				D8A28D08295F84AC00361D85 /* CodeEditorView in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D805E427295B41CC0007C402 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D805E431295B41CC0007C402 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D805E410295B41CA0007C402 = {
+			isa = PBXGroup;
+			children = (
+				D805E41B295B41CA0007C402 /* MamachineGUI */,
+				D805E42D295B41CC0007C402 /* MamachineGUITests */,
+				D805E437295B41CC0007C402 /* MamachineGUIUITests */,
+				D805E41A295B41CA0007C402 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D805E41A295B41CA0007C402 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D805E419295B41CA0007C402 /* MamachineGUI.app */,
+				D805E42A295B41CC0007C402 /* MamachineGUITests.xctest */,
+				D805E434295B41CC0007C402 /* MamachineGUIUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D805E41B295B41CA0007C402 /* MamachineGUI */ = {
+			isa = PBXGroup;
+			children = (
+				D805E41C295B41CA0007C402 /* MamachineGUIApp.swift */,
+				D805E41E295B41CA0007C402 /* ContentView.swift */,
+				D805E420295B41CC0007C402 /* Assets.xcassets */,
+				D805E425295B41CC0007C402 /* MamachineGUI.entitlements */,
+				D805E422295B41CC0007C402 /* Preview Content */,
+				D805E450295B69250007C402 /* Runner.swift */,
+				D8A28D04295F61F700361D85 /* SerialPortView.swift */,
+			);
+			path = MamachineGUI;
+			sourceTree = "<group>";
+		};
+		D805E422295B41CC0007C402 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D805E423295B41CC0007C402 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D805E42D295B41CC0007C402 /* MamachineGUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D805E42E295B41CC0007C402 /* MamachineGUITests.swift */,
+			);
+			path = MamachineGUITests;
+			sourceTree = "<group>";
+		};
+		D805E437295B41CC0007C402 /* MamachineGUIUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D805E438295B41CC0007C402 /* MamachineGUIUITests.swift */,
+				D805E43A295B41CC0007C402 /* MamachineGUIUITestsLaunchTests.swift */,
+			);
+			path = MamachineGUIUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D805E418295B41CA0007C402 /* MamachineGUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D805E43E295B41CC0007C402 /* Build configuration list for PBXNativeTarget "MamachineGUI" */;
+			buildPhases = (
+				D805E415295B41CA0007C402 /* Sources */,
+				D805E416295B41CA0007C402 /* Frameworks */,
+				D805E417295B41CA0007C402 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MamachineGUI;
+			packageProductDependencies = (
+				D805E44E295B59B40007C402 /* FilePicker */,
+				D8C66914295C9C32006949BE /* SwiftSlash */,
+				D8A28D02295F61B700361D85 /* ORSSerial */,
+				D8A28D07295F84AC00361D85 /* CodeEditorView */,
+			);
+			productName = MamachineGUI;
+			productReference = D805E419295B41CA0007C402 /* MamachineGUI.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D805E429295B41CC0007C402 /* MamachineGUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D805E441295B41CC0007C402 /* Build configuration list for PBXNativeTarget "MamachineGUITests" */;
+			buildPhases = (
+				D805E426295B41CC0007C402 /* Sources */,
+				D805E427295B41CC0007C402 /* Frameworks */,
+				D805E428295B41CC0007C402 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D805E42C295B41CC0007C402 /* PBXTargetDependency */,
+			);
+			name = MamachineGUITests;
+			productName = MamachineGUITests;
+			productReference = D805E42A295B41CC0007C402 /* MamachineGUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D805E433295B41CC0007C402 /* MamachineGUIUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D805E444295B41CC0007C402 /* Build configuration list for PBXNativeTarget "MamachineGUIUITests" */;
+			buildPhases = (
+				D805E430295B41CC0007C402 /* Sources */,
+				D805E431295B41CC0007C402 /* Frameworks */,
+				D805E432295B41CC0007C402 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D805E436295B41CC0007C402 /* PBXTargetDependency */,
+			);
+			name = MamachineGUIUITests;
+			productName = MamachineGUIUITests;
+			productReference = D805E434295B41CC0007C402 /* MamachineGUIUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D805E411295B41CA0007C402 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1410;
+				LastUpgradeCheck = 1410;
+				TargetAttributes = {
+					D805E418295B41CA0007C402 = {
+						CreatedOnToolsVersion = 14.1;
+					};
+					D805E429295B41CC0007C402 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = D805E418295B41CA0007C402;
+					};
+					D805E433295B41CC0007C402 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = D805E418295B41CA0007C402;
+					};
+				};
+			};
+			buildConfigurationList = D805E414295B41CA0007C402 /* Build configuration list for PBXProject "MamachineGUI" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D805E410295B41CA0007C402;
+			packageReferences = (
+				D805E44D295B59B40007C402 /* XCRemoteSwiftPackageReference "FileOrFolderPicker" */,
+				D8C66913295C9C32006949BE /* XCRemoteSwiftPackageReference "SwiftSlash" */,
+				D8A28D01295F61B700361D85 /* XCRemoteSwiftPackageReference "ORSSerialPort" */,
+				D8A28D06295F84AC00361D85 /* XCRemoteSwiftPackageReference "CodeEditorView" */,
+			);
+			productRefGroup = D805E41A295B41CA0007C402 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D805E418295B41CA0007C402 /* MamachineGUI */,
+				D805E429295B41CC0007C402 /* MamachineGUITests */,
+				D805E433295B41CC0007C402 /* MamachineGUIUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D805E417295B41CA0007C402 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D805E424295B41CC0007C402 /* Preview Assets.xcassets in Resources */,
+				D805E421295B41CC0007C402 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D805E428295B41CC0007C402 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D805E432295B41CC0007C402 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D805E415295B41CA0007C402 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D805E451295B69250007C402 /* Runner.swift in Sources */,
+				D805E41F295B41CA0007C402 /* ContentView.swift in Sources */,
+				D805E41D295B41CA0007C402 /* MamachineGUIApp.swift in Sources */,
+				D8A28D05295F61F700361D85 /* SerialPortView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D805E426295B41CC0007C402 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D805E42F295B41CC0007C402 /* MamachineGUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D805E430295B41CC0007C402 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D805E43B295B41CC0007C402 /* MamachineGUIUITestsLaunchTests.swift in Sources */,
+				D805E439295B41CC0007C402 /* MamachineGUIUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D805E42C295B41CC0007C402 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D805E418295B41CA0007C402 /* MamachineGUI */;
+			targetProxy = D805E42B295B41CC0007C402 /* PBXContainerItemProxy */;
+		};
+		D805E436295B41CC0007C402 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D805E418295B41CA0007C402 /* MamachineGUI */;
+			targetProxy = D805E435295B41CC0007C402 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D805E43C295B41CC0007C402 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D805E43D295B41CC0007C402 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		D805E43F295B41CC0007C402 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MamachineGUI/MamachineGUI.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MamachineGUI/Preview Content\"";
+				DEVELOPMENT_TEAM = L9G66SYUL8;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jimmyhoughjr.MamachineGUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D805E440295B41CC0007C402 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MamachineGUI/MamachineGUI.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MamachineGUI/Preview Content\"";
+				DEVELOPMENT_TEAM = L9G66SYUL8;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jimmyhoughjr.MamachineGUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		D805E442295B41CC0007C402 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L9G66SYUL8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jimmyhoughjr.MamachineGUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MamachineGUI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MamachineGUI";
+			};
+			name = Debug;
+		};
+		D805E443295B41CC0007C402 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L9G66SYUL8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jimmyhoughjr.MamachineGUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MamachineGUI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MamachineGUI";
+			};
+			name = Release;
+		};
+		D805E445295B41CC0007C402 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L9G66SYUL8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jimmyhoughjr.MamachineGUIUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = MamachineGUI;
+			};
+			name = Debug;
+		};
+		D805E446295B41CC0007C402 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L9G66SYUL8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jimmyhoughjr.MamachineGUIUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = MamachineGUI;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D805E414295B41CA0007C402 /* Build configuration list for PBXProject "MamachineGUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D805E43C295B41CC0007C402 /* Debug */,
+				D805E43D295B41CC0007C402 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D805E43E295B41CC0007C402 /* Build configuration list for PBXNativeTarget "MamachineGUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D805E43F295B41CC0007C402 /* Debug */,
+				D805E440295B41CC0007C402 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D805E441295B41CC0007C402 /* Build configuration list for PBXNativeTarget "MamachineGUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D805E442295B41CC0007C402 /* Debug */,
+				D805E443295B41CC0007C402 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D805E444295B41CC0007C402 /* Build configuration list for PBXNativeTarget "MamachineGUIUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D805E445295B41CC0007C402 /* Debug */,
+				D805E446295B41CC0007C402 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D805E44D295B59B40007C402 /* XCRemoteSwiftPackageReference "FileOrFolderPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jhoughjr/FileOrFolderPicker";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		D8A28D01295F61B700361D85 /* XCRemoteSwiftPackageReference "ORSSerialPort" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/armadsen/ORSSerialPort";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		D8A28D06295F84AC00361D85 /* XCRemoteSwiftPackageReference "CodeEditorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mchakravarty/CodeEditorView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
+		D8C66913295C9C32006949BE /* XCRemoteSwiftPackageReference "SwiftSlash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tannerdsilva/SwiftSlash";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D805E44E295B59B40007C402 /* FilePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D805E44D295B59B40007C402 /* XCRemoteSwiftPackageReference "FileOrFolderPicker" */;
+			productName = FilePicker;
+		};
+		D8A28D02295F61B700361D85 /* ORSSerial */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8A28D01295F61B700361D85 /* XCRemoteSwiftPackageReference "ORSSerialPort" */;
+			productName = ORSSerial;
+		};
+		D8A28D07295F84AC00361D85 /* CodeEditorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8A28D06295F84AC00361D85 /* XCRemoteSwiftPackageReference "CodeEditorView" */;
+			productName = CodeEditorView;
+		};
+		D8C66914295C9C32006949BE /* SwiftSlash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8C66913295C9C32006949BE /* XCRemoteSwiftPackageReference "SwiftSlash" */;
+			productName = SwiftSlash;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = D805E411295B41CA0007C402 /* Project object */;
+}
