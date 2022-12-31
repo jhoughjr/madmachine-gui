@@ -249,63 +249,74 @@ struct ProjectListView: View {
     
     @State var showingNew = false
     @State var showingEdit = false
+    
+    @State var projectsCollapsed = true
+    
     var sectionPadding:CGFloat = 25
 
     var body: some View {
         VStack(alignment:.leading) {
-            Text("Projects")
-                .font(.title)
-            
             HStack {
+                Text("Projects")
+                    .font(.title)
                 Button {
-                    projectMan.save()
+                    projectsCollapsed.toggle()
                 } label: {
-                    Text("Save")
+                    projectsCollapsed ? Image(systemName: "arrow.up") : Image(systemName: "arrow.down")
                 }
-                Button {
-                    projectMan.load()
-                } label: {
-                    Text("Load")
-                }
-                Button {
-                    showingNew = true
-                } label: {
-                    Text("New ...")
-                }
-                .popover(isPresented: $showingNew,
-                         content:{ NewProjectView() })
-                    
-                
-                
+
             }
-            .padding([.leading], sectionPadding)
-
-            List(selection:$selectedProject) {
-                ForEach(projectMan.projects,
-                        id:\.name) { project in
-                    if project == $selectedProject.wrappedValue {
-                        Button {
-                            showingEdit.toggle()
-                        } label: {
-                            Text("Edit")
-                        }
-                        .popover(isPresented: $showingEdit,
-                                 content: {EditProjectView(project:project )})
-
+            if !projectsCollapsed {
+                HStack {
+                    Button {
+                        projectMan.save()
+                    } label: {
+                        Text("Save")
                     }
-                    Text(project.name)
-                        .onTapGesture {
-                            if project == $selectedProject.wrappedValue {
-                                $selectedProject.wrappedValue = nil
-                            }else {
-                                $selectedProject.wrappedValue = project
-                            }
-                        }
-                        .foregroundColor(selectedProject == project ? .yellow : .white)
+                    Button {
+                        projectMan.load()
+                    } label: {
+                        Text("Load")
+                    }
+                    Button {
+                        showingNew = true
+                    } label: {
+                        Text("New ...")
+                    }
+                    .popover(isPresented: $showingNew,
+                             content:{ NewProjectView() })
+                    
+                    
+                    
                 }
+                .padding([.leading], sectionPadding)
+                
+                List(selection:$selectedProject) {
+                    ForEach(projectMan.projects,
+                            id:\.name) { project in
+                        if project == $selectedProject.wrappedValue {
+                            Button {
+                                showingEdit.toggle()
+                            } label: {
+                                Text("Edit")
+                            }
+                            .popover(isPresented: $showingEdit,
+                                     content: {EditProjectView(project:project )})
+                            
+                        }
+                        Text(project.name)
+                            .onTapGesture {
+                                if project == $selectedProject.wrappedValue {
+                                    $selectedProject.wrappedValue = nil
+                                }else {
+                                    $selectedProject.wrappedValue = project
+                                }
+                            }
+                            .foregroundColor(selectedProject == project ? .yellow : .white)
+                    }
+                }
+                .padding([.leading], sectionPadding)
             }
-            .padding([.leading], sectionPadding)
-
             Divider()
 
         }
@@ -330,6 +341,10 @@ struct ContentView: View {
     
     @State var showingAbout = false
     @State var selectedProject:ProjectManager.Project?
+    @State var projectsCollapsed = true
+    @State var serialCollapsed = true
+    @State var outputCollapsed = true
+    @State var commandsCollapsed = true
     
     var pathPicker: some View {
         VStack(alignment:.leading) {
@@ -447,25 +462,35 @@ struct ContentView: View {
     
     var commands: some View {
         VStack(alignment:.leading) {
-            Text("MMSDK Commands")
-                .font(.title)
-            Toggle("Timestamps", isOn: $logTimestamps)
-                .padding([.leading], sectionPadding)
             HStack {
-                Group {
-                    
-                    ForEach(Runner.MMSDKCommands.allCases, id:\.self) { command in
-                        Button {
-                            runner.run(command, for:selectedProject)
-                        } label: {
-                            Text(command.label)
+                Text("MMSDK Commands")
+                    .font(.title)
+                Button {
+                    commandsCollapsed.toggle()
+                } label: {
+                    commandsCollapsed ? Image(systemName: "arrow.up") : Image(systemName: "arrow.down")
+                }
+
+            }
+            if !commandsCollapsed {
+                Toggle("Timestamps", isOn: $logTimestamps)
+                    .padding([.leading], sectionPadding)
+                HStack {
+                    Group {
+                        
+                        ForEach(Runner.MMSDKCommands.allCases, id:\.self) { command in
+                            Button {
+                                runner.run(command, for:selectedProject)
+                            } label: {
+                                Text(command.label)
+                            }
+                            .disabled(!hasContext(for: command))
+                            //
                         }
-                        .disabled(!hasContext(for: command))
-//
                     }
                 }
+                .padding([.leading], sectionPadding)
             }
-            .padding([.leading], sectionPadding)
         }
     }
     
@@ -480,14 +505,22 @@ struct ContentView: View {
                 } label: {
                     Text("Clear")
                 }
+                Button {
+                    outputCollapsed.toggle()
+                } label: {
+                    outputCollapsed ? Image(systemName: "arrow.up") : Image(systemName: "arrow.down")
+                }
+
             }
-            TextEditor(text:$runner.output)
-                .padding([.leading],sectionPadding)
+            if !outputCollapsed {
+                TextEditor(text:$runner.output)
+                    .padding([.leading],sectionPadding)
+            }
+            Divider()
         }
     }
     
     var body: some View {
-        HStack {
             VStack {
                 ProjectListView(selectedProject: $selectedProject)
     //           pathPicker
@@ -500,7 +533,7 @@ struct ContentView: View {
                 Divider()
                outputView
                
-                    HStack {
+                HStack(alignment:.top) {
                         FSView(project: selectedProject,
                                projectWatcher: watcher,
                                fileSelections: fileSelections)
@@ -513,7 +546,6 @@ struct ContentView: View {
                
             }
             .padding()
-        }
      
     }
 }

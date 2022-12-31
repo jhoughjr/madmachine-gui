@@ -68,7 +68,7 @@ class SerialMan:NSObject, ObservableObject, ORSSerialPortDelegate {
 
 struct SerialPortView:View {
     @ObservedObject var serial = SerialMan.shared
-
+    @State var serialCollapsed = true
     var buttons: some View {
         HStack {
             
@@ -93,42 +93,52 @@ struct SerialPortView:View {
     
     var body: some View {
         VStack(alignment:.leading) {
-            Text("Serial Monitor")
-                .font(.title)
-            if let port = serial.selectedPort {
-                HStack {
-                    Text("Port")
-                        .font(.title2)
-                    Text("\(port.path)")
-                        .bold()
-                        .onLongPressGesture {
-                            serial.selectedPort = nil
-                        }
-                    buttons
+            HStack {
+                Text("Serial Monitor")
+                    .font(.title)
+                Button {
+                    serialCollapsed.toggle()
+                } label: {
+                    serialCollapsed ? Image(systemName: "arrow.up") : Image(systemName: "arrow.down")
                 }
-                .padding()
+
             }
-            else {
-                Text("Select serial port.")
-                Group {
-                    ForEach(serial.ports(), id:\.self) { t in
-                        HStack {
-                            
-                            Text(t.path)
-                                .foregroundColor(t == serial.selectedPort ? .accentColor : .primary)
-                        }
-                        .onTapGesture {
-                            serial.selectedPort = t
+            if !serialCollapsed {
+                if let port = serial.selectedPort {
+                    HStack {
+                        Text("Port")
+                            .font(.title2)
+                        Text("\(port.path)")
+                            .bold()
+                            .onLongPressGesture {
+                                serial.selectedPort = nil
+                            }
+                        buttons
+                    }
+                    .padding()
+                }
+                else {
+                    Text("Select serial port.")
+                    Group {
+                        ForEach(serial.ports(), id:\.self) { t in
+                            HStack {
+                                
+                                Text(t.path)
+                                    .foregroundColor(t == serial.selectedPort ? .accentColor : .primary)
+                            }
+                            .onTapGesture {
+                                serial.selectedPort = t
+                            }
                         }
                     }
+                    .padding()
+                    .onAppear(perform: {
+                        serial.selectStoredSelectedPort()
+                    })
+                    .padding([.leading], 25)
                 }
-                .padding()
-                .onAppear(perform: {
-                    serial.selectStoredSelectedPort()
-                })
-                .padding([.leading], 25)
+                TextEditor(text: $serial.portBuffer)
             }
-            TextEditor(text: $serial.portBuffer)
             Divider()
         }
 
@@ -163,24 +173,35 @@ struct FSView:View {
     
     @ObservedObject var projectWatcher = ProjectWatcher()
     @ObservedObject var fileSelections:FileSelections
+    @State var filesCollapsed = true
     
     var body:some View {
         
         VStack(alignment:.leading) {
-            Text("Files")
-                .font(.title)
-            ForEach($projectWatcher.workingFiles.wrappedValue,
+            HStack {
+                Text("Files")
+                    .font(.title)
+                Button {
+                    filesCollapsed.toggle()
+                } label: {
+                    filesCollapsed ? Image(systemName: "arrow.up") : Image(systemName: "arrow.down")
+                }
+
+            }
+            if !filesCollapsed {
+                ForEach($projectWatcher.workingFiles.wrappedValue,
                         id:\.self) { filepath in
                     Text("\(filepath)")
-                    .foregroundColor(fileSelections.selectedEditorFile == filepath ? .accentColor : .primary)
-                    .onTapGesture {
-                        
-                        $fileSelections.selectedEditorFile.wrappedValue = filepath
-                        print("\(fileSelections.selectedEditorFile)")
-                    }
+                        .foregroundColor(fileSelections.selectedEditorFile == filepath ? .accentColor : .primary)
+                        .onTapGesture {
+                            
+                            $fileSelections.selectedEditorFile.wrappedValue = filepath
+                            print("\(fileSelections.selectedEditorFile)")
+                        }
+                }
             }
-            Spacer()
-          
+
+            Divider()
         }
         .padding()
         .onChange(of: project,
@@ -233,7 +254,6 @@ struct EditorView:View {
                 print("no data at  \(path)")
             }
         })
-        .padding()
      
     }
 }
