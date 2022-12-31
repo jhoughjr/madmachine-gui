@@ -325,6 +325,8 @@ struct ContentView: View {
     
     @ObservedObject var runner = Runner()
     @ObservedObject var projMan = ProjectManager.shared
+    @ObservedObject var watcher = ProjectWatcher()
+    @ObservedObject var fileSelections = FileSelections()
     
     @State var showingAbout = false
     @State var selectedProject:ProjectManager.Project?
@@ -497,8 +499,18 @@ struct ContentView: View {
                commands
                 Divider()
                outputView
-                FSView(project: selectedProject)
-                EditorView()
+               
+                    HStack {
+                        FSView(project: selectedProject,
+                               projectWatcher: watcher,
+                               fileSelections: fileSelections)
+                        if let p = selectedProject {
+                            EditorView(fileSelections: fileSelections,
+                                       project: p)
+                        }
+                    }
+               
+               
             }
             .padding()
         }
