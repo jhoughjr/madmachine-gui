@@ -146,24 +146,72 @@ struct SerialPortView:View {
 }
 
 class ProjectWatcher:ObservableObject {
-    @Published var workingFiles:[String] = [String]()
+    @Published var workingFiles:[String] = [String]() {
+        didSet {
+            print("\(workingFiles)")
+        }
+    }
     
     func look(at:ProjectManager.Project) {
         let foo = at.workingDir.replacing("file://", with: "")
         print("looking at \(foo)")
 
         if let fs = try? FileManager.default.contentsOfDirectory(atPath: foo) {
-            print("got fs info")
-            workingFiles = fs
+            workingFiles = fs.map({"\(foo)\($0)"})
         }else {
             print("couldn't look")
         }
     }
+    
 }
 
 class FileSelections:ObservableObject {
-    @Published var selectedEditorFile = ""
+    @Published var project:ProjectManager.Project? = nil {
+        didSet {
+            workingDIr = project?.workingDir ?? ""
+        }
+    }
     
+    @Published var selection = "" {
+        didSet {
+            print("didSet FileSelections.selection \(selection)")
+            var isDir:ObjCBool = false
+            
+            let path = selection
+            print("Checking path \(path)")
+            _ = FileManager.default.fileExists(atPath: path, isDirectory: &isDir)
+            if isDir.boolValue {
+                workingDIr = path
+                if let fs = try? FileManager.default.contentsOfDirectory(atPath: path) {
+                    let foo = workingDIr.replacing("file://", with: "")
+                    currentDirContents = fs.map({"\(foo)/\($0)"})
+                }else {
+                    print("couldn't look")
+                }
+            }else {
+                print("selected file, setting editorFIle")
+                selectedEditorFile = selection
+            }
+        }
+    }
+    
+    @Published var workingDIr = "" {
+        didSet {
+            print("workingDIr = \(workingDIr)")
+        }
+    }
+    
+    @Published var selectedEditorFile = "" {
+        didSet {
+            print("selectedEditorFile = \(selectedEditorFile)")
+        }
+    }
+    
+    @Published var currentDirContents = [String]() {
+        didSet {
+            print("currnt \(currentDirContents)")
+        }
+    }
 }
 
 struct FSView:View {
@@ -175,28 +223,33 @@ struct FSView:View {
     @ObservedObject var fileSelections:FileSelections
     @State var filesCollapsed = true
     
+    var collapseControl: some View {
+        HStack {
+            Text("Files")
+                .font(.title)
+            Button {
+                filesCollapsed.toggle()
+            } label: {
+                filesCollapsed ? Image(systemName: "arrow.up") : Image(systemName: "arrow.down")
+            }
+
+        }
+    }
+    
     var body:some View {
         
         VStack(alignment:.leading) {
-            HStack {
-                Text("Files")
-                    .font(.title)
-                Button {
-                    filesCollapsed.toggle()
-                } label: {
-                    filesCollapsed ? Image(systemName: "arrow.up") : Image(systemName: "arrow.down")
-                }
-
-            }
+           collapseControl
             if !filesCollapsed {
-                ForEach($projectWatcher.workingFiles.wrappedValue,
+                ForEach($fileSelections.currentDirContents.wrappedValue.isEmpty ? projectWatcher.workingFiles : $fileSelections.currentDirContents.wrappedValue,
                         id:\.self) { filepath in
+                    
                     Text("\(filepath)")
                         .foregroundColor(fileSelections.selectedEditorFile == filepath ? .accentColor : .primary)
                         .onTapGesture {
-                            
-                            $fileSelections.selectedEditorFile.wrappedValue = filepath
-                            print("\(fileSelections.selectedEditorFile)")
+                            $fileSelections.selection.wrappedValue = filepath
+                            print("selected \(fileSelections.selection)")
+
                         }
                 }
             }
@@ -209,12 +262,28 @@ struct FSView:View {
             print("project changed")
             if let proj = v {
                     projectWatcher.look(at:proj)
+                fileSelections.project = proj
             }
         })
-        .onChange(of: projectWatcher.workingFiles) { newValue in
-            print("fpp")
-        }
+       
     }
+}
+
+// Represents a simple file or a folder
+struct File: Identifiable { // identifiable ✓
+  let id = UUID()
+  let name: String
+  var children: [File]? // optional array of type File ✓
+
+  var icon: String { // makes things prettier
+    if children == nil {
+       return "doc"
+    } else if children?.isEmpty == true {
+       return "folder"
+    } else {
+       return "folder.fill"
+    }
+  }
 }
 
 struct EditorView:View {
@@ -242,9 +311,7 @@ struct EditorView:View {
                   perform: { newValue in
             print("new \(newValue)")
 
-            let path = project.workingDir.appending(newValue)
-                .replacingOccurrences(of: "file://",
-                                      with: "")
+            let path = newValue
             
             if let d = FileManager.default.contents(atPath: path) {
                 
