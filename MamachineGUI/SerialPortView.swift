@@ -171,6 +171,7 @@ class FileSelections:ObservableObject {
             workingDIr = project?.workingDir ?? ""
         }
     }
+    @Published var previousDirectory = ""
     
     @Published var selection = "" {
         didSet {
@@ -181,9 +182,11 @@ class FileSelections:ObservableObject {
             print("Checking path \(path)")
             _ = FileManager.default.fileExists(atPath: path, isDirectory: &isDir)
             if isDir.boolValue {
+                previousDirectory = workingDIr
                 workingDIr = path
                 if let fs = try? FileManager.default.contentsOfDirectory(atPath: path) {
                     let foo = workingDIr.replacing("file://", with: "")
+                    
                     currentDirContents = fs.map({"\(foo)/\($0)"})
                 }else {
                     print("couldn't look")
@@ -241,6 +244,14 @@ struct FSView:View {
         VStack(alignment:.leading) {
            collapseControl
             if !filesCollapsed {
+                if !fileSelections.previousDirectory.isEmpty {
+                    Button {
+                        fileSelections.selection = URL(filePath: fileSelections.workingDIr).deletingLastPathComponent().path
+                    } label: {
+                        Text("..")
+                    }
+
+                }
                 ForEach($fileSelections.currentDirContents.wrappedValue.isEmpty ? projectWatcher.workingFiles : $fileSelections.currentDirContents.wrappedValue,
                         id:\.self) { filepath in
                     
