@@ -307,10 +307,29 @@ struct EditorView:View {
     
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
+    var editorCommands: some View {
+        HStack {
+            Button {
+                if  !fileSelections.selectedEditorFile.isEmpty {
+                    let url = URL(filePath: fileSelections.selectedEditorFile)
+                    do {
+                        try $text.wrappedValue.data(using: .utf8)?.write(to: url)
+                    }
+                    catch {
+                        print(error)
+                    }
+                }
+            } label: {
+                Text("Save")
+            }
+
+        }
+    }
     var body: some View {
         VStack(alignment:.leading) {
             Text("Code Editor")
                 .font(.title)
+            editorCommands
             CodeEditor(text: $text,
                        position: $position,
                        messages: $messages,
@@ -320,7 +339,6 @@ struct EditorView:View {
         }
         .onChange(of: fileSelections.selectedEditorFile,
                   perform: { newValue in
-            print("new \(newValue)")
 
             let path = newValue
             
