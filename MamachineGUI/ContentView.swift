@@ -8,9 +8,6 @@
 import SwiftUI
 import FilePicker
 
-
-// make setions collapseable
-
 struct AboutView:View {
     
     var body: some View {
@@ -35,14 +32,13 @@ class OutputBuffer:ObservableObject {
     @Published var stdOut = ""
 }
 
-
-
 struct InitContext {
     let name:String
     let projectType:ProjectManager.Project.ProjectType
     let board:ProjectManager.Project.BoardType
     let verbose:Bool
 }
+
 struct BuildContext {
     let verbose:Bool
 }
@@ -56,6 +52,7 @@ struct InitContextView: View {
         }
     }
 }
+
 struct BuildContextView:View {
     @Binding var context:BuildContext
     var body: some View {
@@ -253,19 +250,24 @@ struct ProjectListView: View {
     @State var projectsCollapsed = true
     
     var sectionPadding:CGFloat = 25
+    
+    var titleView: some View {
+        HStack {
+            Text("Projects")
+                .font(.title)
+            
+            Button {
+                projectsCollapsed.toggle()
+            } label: {
+                projectsCollapsed ? Image(systemName: "arrow.up") : Image(systemName: "arrow.down")
+            }
 
+        }
+    }
+    
     var body: some View {
         VStack(alignment:.leading) {
-            HStack {
-                Text("Projects")
-                    .font(.title)
-                Button {
-                    projectsCollapsed.toggle()
-                } label: {
-                    projectsCollapsed ? Image(systemName: "arrow.up") : Image(systemName: "arrow.down")
-                }
-
-            }
+            titleView
             if !projectsCollapsed {
                 HStack {
                     Button {
@@ -291,34 +293,39 @@ struct ProjectListView: View {
                 }
                 .padding([.leading], sectionPadding)
                 
-                List(selection:$selectedProject) {
-                    ForEach(projectMan.projects,
-                            id:\.name) { project in
-                        if project == $selectedProject.wrappedValue {
-                            Button {
-                                showingEdit.toggle()
-                            } label: {
-                                Text("Edit")
-                            }
-                            .popover(isPresented: $showingEdit,
-                                     content: {EditProjectView(project:project )})
-                            
-                        }
-                        Text(project.name)
-                            .onTapGesture {
-                                if project == $selectedProject.wrappedValue {
-                                    $selectedProject.wrappedValue = nil
-                                }else {
-                                    $selectedProject.wrappedValue = project
+
+                    HStack {
+                        ForEach(projectMan.projects,
+                                id:\.name) { project in
+                            if project == $selectedProject.wrappedValue {
+                                Button {
+                                    showingEdit.toggle()
+                                } label: {
+                                    Text("Edit")
                                 }
+                                .popover(isPresented: $showingEdit,
+                                         content: {EditProjectView(project:project )})
+                                
                             }
-                            .foregroundColor(selectedProject == project ? .yellow : .white)
+                            Text(project.name)
+                                .onTapGesture {
+                                    if project == $selectedProject.wrappedValue {
+                                        $selectedProject.wrappedValue = nil
+                                    }else {
+                                        $selectedProject.wrappedValue = project
+                                    }
+                                }
+                                .foregroundColor(selectedProject == project ? .yellow : .white)
+                        }
+                        //                    }
                     }
-                }
+
                 .padding([.leading], sectionPadding)
             }
+            else {
+                
+            }
             Divider()
-
         }
         .onAppear {
             projectMan.load()
@@ -456,7 +463,6 @@ struct ContentView: View {
         }
     }
     
-    
     // command / subcommand / value
     @State var contexts = [Runner.MMSDKCommands:[String:String]]()
     
@@ -490,6 +496,7 @@ struct ContentView: View {
                     }
                 }
                 .padding([.leading], sectionPadding)
+                outputView
             }
         }
     }
@@ -518,34 +525,29 @@ struct ContentView: View {
             }
             Divider()
         }
+        
     }
     
     var body: some View {
-            VStack {
+        
+        VStack {
+            VStack(alignment:.leading) {
                 ProjectListView(selectedProject: $selectedProject)
-    //           pathPicker
                 SerialPortView()
                 Divider()
+                commands
             }
-            VStack(alignment:.leading){
-                
-               commands
-                Divider()
-               outputView
-               
-                HStack(alignment:.top) {
-                        FSView(project: selectedProject,
-                               projectWatcher: watcher,
-                               fileSelections: fileSelections)
-                        if let p = selectedProject {
-                            EditorView(fileSelections: fileSelections,
-                                       project: p)
-                        }
-                    }
-               
-               
+            
+            HSplitView {
+                    FSView(project: selectedProject,
+                           projectWatcher: watcher,
+                           fileSelections: fileSelections)
+                if let p = selectedProject {
+                    EditorView(fileSelections: fileSelections,
+                               project: p)
+                }
             }
-            .padding()
-     
+            .padding([.bottom],0)
+        }
     }
 }

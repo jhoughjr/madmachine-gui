@@ -243,25 +243,26 @@ struct FSView:View {
         
         VStack(alignment:.leading) {
            collapseControl
+            Text("\(URL(filePath: fileSelections.workingDIr).path())")
+
             if !filesCollapsed {
-                if !fileSelections.previousDirectory.isEmpty {
                     Button {
                         fileSelections.selection = URL(filePath: fileSelections.workingDIr).deletingLastPathComponent().path
                     } label: {
                         Text("..")
                     }
 
-                }
-                ForEach($fileSelections.currentDirContents.wrappedValue.isEmpty ? projectWatcher.workingFiles : $fileSelections.currentDirContents.wrappedValue,
-                        id:\.self) { filepath in
-                    
-                    Text("\(filepath)")
-                        .foregroundColor(fileSelections.selectedEditorFile == filepath ? .accentColor : .primary)
-                        .onTapGesture {
-                            $fileSelections.selection.wrappedValue = filepath
-                            print("selected \(fileSelections.selection)")
-
-                        }
+                    Divider()
+                List {
+                    ForEach($fileSelections.currentDirContents.wrappedValue.isEmpty ? projectWatcher.workingFiles : $fileSelections.currentDirContents.wrappedValue,
+                            id:\.self) { filepath in
+                        
+                        Text("\(URL(filePath: filepath).lastPathComponent)")
+                            .foregroundColor(fileSelections.selectedEditorFile == filepath ? .accentColor : .primary)
+                            .onTapGesture {
+                                $fileSelections.selection.wrappedValue = filepath
+                            }
+                    }
                 }
             }
 
@@ -302,6 +303,8 @@ struct EditorView:View {
     @State private var position: CodeEditor.Position  = CodeEditor.Position()
     @State private var messages: Set<Located<Message>> = Set()
 
+    @State var checksum = ""
+    
     @ObservedObject var fileSelections:FileSelections
     @State var project:ProjectManager.Project
     
@@ -311,9 +314,14 @@ struct EditorView:View {
         HStack {
             Button {
                 if  !fileSelections.selectedEditorFile.isEmpty {
+                    
                     let url = URL(filePath: fileSelections.selectedEditorFile)
                     do {
                         try $text.wrappedValue.data(using: .utf8)?.write(to: url)
+                        DispatchQueue.main.async {
+                            $checksum.wrappedValue = $text.wrappedValue.md5
+                        }
+                        
                     }
                     catch {
                         print(error)
@@ -322,7 +330,7 @@ struct EditorView:View {
             } label: {
                 Text("Save")
             }
-
+            .disabled(checksum == text.md5)
         }
     }
     var body: some View {
@@ -344,12 +352,28 @@ struct EditorView:View {
             
             if let d = FileManager.default.contents(atPath: path) {
                 
-                $text.wrappedValue = String(data: d,
-                                            encoding: .utf8) ?? "Couldnt load utf8"
+                let loadedText = String(data: d,
+                                        encoding: .utf8) ?? "Couldnt load utf8"
+                
+                $text.wrappedValue = loadedText
+                checksum = loadedText.md5
             }else {
                 print("no data at  \(path)")
             }
         })
      
+    }
+}
+import CommonCrypto
+
+extension String {
+    var md5: String {
+        let data = Data(self.utf8)
+        let hash = data.withUnsafeBytes { (bytes: UnsafeRawBufferPointer) -> [UInt8] in
+            var hash = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
+            CC_MD5(bytes.baseAddress, CC_LONG(data.count), &hash)
+            return hash
+        }
+        return hash.map { String(format: "%02x", $0) }.joined()
     }
 }
