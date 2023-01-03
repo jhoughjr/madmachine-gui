@@ -21,6 +21,11 @@ class Runner:ObservableObject {
 //        case checkout
 //        case commit
 //    }
+    
+    enum MiscCommands:String, CaseIterable {
+        case openInXcode
+    }
+    
     enum MMSDKCommands:String, CaseIterable {
         case initializeProject
         case build
@@ -123,6 +128,7 @@ class Runner:ObservableObject {
         }
         DispatchQueue.main.async {
             self.output += line + s + "\n"
+            print(line)
         }
     }
     
@@ -300,6 +306,58 @@ class Runner:ObservableObject {
                     output("ERROR \(exitCode)")
                 }
 
+        }
+    }
+    
+    func run(_ command:MiscCommands = .openInXcode, ctx:String) {
+        switch command {
+        case .openInXcode:
+            Task {
+                // display running commandline in output
+                print("opening \(ctx) in Xcode..")
+                self.output("opening \(ctx) in Xcode..")
+               
+                //define the command you'd like to run
+                let launch = """
+                open \(ctx)
+                """
+                output(launch)
+                print(launch)
+                let zfsDatasetsCommand:Command = Command(bash:launch)
+                
+                // set its working directory
+//                zfsDatasetsCommand.workingDirectory = URL(string: workingDirPath)!
+                //pass the command structure to a new ProcessInterface. in this example, stdout will be parsed into lines with the lf byte, and stderr will be unparsed (raw data will be passed into the stream)
+                let zfsProcessInterface = ProcessInterface(command:zfsDatasetsCommand,
+                                                           stdout:.active(.lf),
+                                                           stderr:.active(.unparsedRaw))
+                //launch the process. if you are running many concurrent processes (using most of the available resources), this is where your process will be queued until there are enough resources to support the launched process.
+                let _ = try await zfsProcessInterface.launch()
+                
+                // pass stdout data if any was passed to published output
+                for await outputLine in await zfsProcessInterface.stdout {
+                        guard let s = String(data:outputLine, encoding:.utf8) else {return}
+                        output(s)
+                }
+                
+                // pass stderr data if any was passed to published output
+                for await stderrChunk in await zfsProcessInterface.stderr {
+                    guard let s = String(data:stderrChunk, encoding:.utf8) else {return}
+                    output(s)
+                }
+                
+                // retreive the exit code of the process.
+                let exitCode = try await zfsProcessInterface.exitCode()
+                
+                    if (exitCode == 0) {
+                        //do work based on success
+                        output("Command SUCCEEDED")
+                    } else {
+                        //do work based on error
+                        output("ERROR \(exitCode)")
+                    }
+
+            }
         }
     }
 }

@@ -224,6 +224,7 @@ struct FSView:View {
     
     @ObservedObject var projectWatcher = ProjectWatcher()
     @ObservedObject var fileSelections:FileSelections
+    @ObservedObject var runner = Runner()
     @State var filesCollapsed = true
     
     var collapseControl: some View {
@@ -256,12 +257,20 @@ struct FSView:View {
                 List {
                     ForEach($fileSelections.currentDirContents.wrappedValue.isEmpty ? projectWatcher.workingFiles : $fileSelections.currentDirContents.wrappedValue,
                             id:\.self) { filepath in
-                        
-                        Text("\(URL(filePath: filepath).lastPathComponent)")
-                            .foregroundColor(fileSelections.selectedEditorFile == filepath ? .accentColor : .primary)
-                            .onTapGesture {
-                                $fileSelections.selection.wrappedValue = filepath
+                        HStack {
+                            Text("\(URL(filePath: filepath).lastPathComponent)")
+                                .foregroundColor(fileSelections.selectedEditorFile == filepath ? .accentColor : .primary)
+                                .onTapGesture {
+                                    $fileSelections.selection.wrappedValue = filepath
+                                }
+                            Button {
+                                runner.run(.openInXcode,
+                                           ctx:fileSelections.selectedEditorFile)
+                            } label: {
+                                Text("Xcode")
                             }
+
+                        }
                     }
                 }
             }
