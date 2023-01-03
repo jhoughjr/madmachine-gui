@@ -127,14 +127,16 @@ class Runner:ObservableObject {
         if logTimestamps {
             line += "\(Date()) - "
         }
+        
         DispatchQueue.main.async {
             self.lines.insert(contentsOf: [line,s,"\n"], at: 0)
-            self.output = self.lines.reversed().joined()
+            self.output = self.lines.joined()
         }
     }
     
     func clearOutput() {
         DispatchQueue.main.async {
+            self.lines.removeAll()
             self.output = ""
         }
     }
