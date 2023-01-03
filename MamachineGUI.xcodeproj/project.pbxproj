@@ -20,6 +20,7 @@
 		D8A28D05295F61F700361D85 /* SerialPortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A28D04295F61F700361D85 /* SerialPortView.swift */; };
 		D8A28D08295F84AC00361D85 /* CodeEditorView in Frameworks */ = {isa = PBXBuildFile; productRef = D8A28D07295F84AC00361D85 /* CodeEditorView */; };
 		D8C66915295C9C32006949BE /* SwiftSlash in Frameworks */ = {isa = PBXBuildFile; productRef = D8C66914295C9C32006949BE /* SwiftSlash */; };
+		D8C7750929638199009EC9B6 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = D8C7750829638199009EC9B6 /* KeyboardShortcuts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 			files = (
 				D8A28D03295F61B700361D85 /* ORSSerial in Frameworks */,
 				D8C66915295C9C32006949BE /* SwiftSlash in Frameworks */,
+				D8C7750929638199009EC9B6 /* KeyboardShortcuts in Frameworks */,
 				D805E44F295B59B40007C402 /* FilePicker in Frameworks */,
 				D8A28D08295F84AC00361D85 /* CodeEditorView in Frameworks */,
 			);
@@ -164,6 +166,7 @@
 				D8C66914295C9C32006949BE /* SwiftSlash */,
 				D8A28D02295F61B700361D85 /* ORSSerial */,
 				D8A28D07295F84AC00361D85 /* CodeEditorView */,
+				D8C7750829638199009EC9B6 /* KeyboardShortcuts */,
 			);
 			productName = MamachineGUI;
 			productReference = D805E419295B41CA0007C402 /* MamachineGUI.app */;
@@ -242,6 +245,7 @@
 				D8C66913295C9C32006949BE /* XCRemoteSwiftPackageReference "SwiftSlash" */,
 				D8A28D01295F61B700361D85 /* XCRemoteSwiftPackageReference "ORSSerialPort" */,
 				D8A28D06295F84AC00361D85 /* XCRemoteSwiftPackageReference "CodeEditorView" */,
+				D8C7750729638199009EC9B6 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 			);
 			productRefGroup = D805E41A295B41CA0007C402 /* Products */;
 			projectDirPath = "";
@@ -638,6 +642,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		D8C7750729638199009EC9B6 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -660,6 +672,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D8C66913295C9C32006949BE /* XCRemoteSwiftPackageReference "SwiftSlash" */;
 			productName = SwiftSlash;
+		};
+		D8C7750829638199009EC9B6 /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8C7750729638199009EC9B6 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			productName = KeyboardShortcuts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

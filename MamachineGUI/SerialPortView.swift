@@ -28,7 +28,7 @@ class SerialMan:NSObject, ObservableObject, ORSSerialPortDelegate {
     @Published var openPort:ORSSerialPort? = nil
     
     @Published var portBuffer = ""
-    
+    @Published var lines = [""]
     func ports() -> [ORSSerialPort] {
         let ports = ORSSerialPortManager.shared().availablePorts
         print("\(ports)")
@@ -50,8 +50,10 @@ class SerialMan:NSObject, ObservableObject, ORSSerialPortDelegate {
     func serialPort(_ serialPort: ORSSerialPort, didReceive data: Data) {
         let string = String(data: data, encoding: .utf8)
         print("Got \(string) from the serial port!")
-        portBuffer += string ?? ""
+        lines.append(string ?? "")
+        portBuffer = lines.reversed().joined() ?? ""
     }
+    
     func serialPortWasRemovedFromSystem(_ serialPort: ORSSerialPort) {
         print("\(serialPort.path) was removed")
     }

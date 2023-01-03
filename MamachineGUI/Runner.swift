@@ -119,6 +119,7 @@ class Runner:ObservableObject {
     @AppStorage("mmsdkpath") var mmsdkPath = ""
     
     @Published var output = ""
+    @Published var lines = [""]
     
     private func output(_ s:String) {
         var line = ""
@@ -127,8 +128,8 @@ class Runner:ObservableObject {
             line += "\(Date()) - "
         }
         DispatchQueue.main.async {
-            self.output += line + s + "\n"
-            print(line)
+            self.lines.insert(contentsOf: [line,s,"\n"], at: 0)
+            self.output = self.lines.reversed().joined()
         }
     }
     
