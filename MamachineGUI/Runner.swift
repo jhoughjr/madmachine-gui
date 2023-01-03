@@ -13,6 +13,7 @@ import SwiftSlash
 class Runner:ObservableObject {
 
     enum GitCommands:String, CaseIterable {
+        case status
         case gitInit
         case clone
         case pull
@@ -23,7 +24,7 @@ class Runner:ObservableObject {
     }
     
     enum MiscCommands:String, CaseIterable {
-        case openInXcode
+        case open
     }
     
     enum MMSDKCommands:String, CaseIterable {
@@ -130,7 +131,7 @@ class Runner:ObservableObject {
         }
         
         DispatchQueue.main.async {
-            self.lines.insert(contentsOf: [line,s,"\n"], at: 0)
+            self.lines.append(contentsOf: [line,s,"\n"])
             self.output = self.lines.joined()
         }
     }
@@ -146,6 +147,7 @@ class Runner:ObservableObject {
     func run(_ command:MMSDKCommands = .build,
              for project:ProjectManager.Project? = nil,
              with context:[String:String]? = nil) {
+        
         print("running \(command) for \(String(describing: project)) with \(String(describing: context))")
         let u = URL(string: mmsdkPath)
         let p = u!.path(percentEncoded: false)
@@ -156,10 +158,7 @@ class Runner:ObservableObject {
             switch command {
                 
             case .initializeProject:
-                // should get verbosity from context via ui
-                // rest is definted in the project really
-                
-                
+  
                     launchString = command.initLaunchString(name: proj.name,
                                                             type: proj.type.rawValue,
                                                             board: proj.boardName.rawValue,
@@ -184,7 +183,6 @@ class Runner:ObservableObject {
         }else {
             launchString = "\(p)\(command.launchString)"
         }
-        //th path to the external program you want to run
         
         let finalString = launchString // stops caprtured ref async issue
     
@@ -219,17 +217,16 @@ class Runner:ObservableObject {
             let exitCode = try await zfsProcessInterface.exitCode()
             
                 if (exitCode == 0) {
-                    //do work based on success
                     output("Command SUCCEEDED")
                 } else {
-                    //do work based on error
                     output("ERROR \(exitCode)")
                 }
 
         }
     }
 
-    func run(_ command:MMSDKCommands = .build, context:[String:String]? = nil) {
+    func run(_ command:MMSDKCommands = .build,
+             context:[String:String]? = nil) {
         
         let u = URL(string: mmsdkPath)
         let p = u!.path(percentEncoded: false)
@@ -313,20 +310,16 @@ class Runner:ObservableObject {
         }
     }
     
-    func run(_ command:MiscCommands = .openInXcode, ctx:String) {
+    func run(_ command:MiscCommands = .open, ctx:String) {
         switch command {
-        case .openInXcode:
+        case .open:
             Task {
                 // display running commandline in output
-                print("opening \(ctx) in Xcode..")
-                self.output("opening \(ctx) in Xcode..")
-               
+                print("opening \(ctx) in default app for its type ...")
                 //define the command you'd like to run
-                let launch = """
-                open \(ctx)
-                """
+                let launch = "open \(ctx)"
                 output(launch)
-                print(launch)
+                
                 let zfsDatasetsCommand:Command = Command(bash:launch)
                 
                 // set its working directory
@@ -350,16 +343,13 @@ class Runner:ObservableObject {
                     output(s)
                 }
                 
-                // retreive the exit code of the process.
                 let exitCode = try await zfsProcessInterface.exitCode()
                 
-                    if (exitCode == 0) {
-                        //do work based on success
-                        output("Command SUCCEEDED")
-                    } else {
-                        //do work based on error
-                        output("ERROR \(exitCode)")
-                    }
+                if (exitCode == 0) {
+                    output("Command SUCCEEDED")
+                } else {
+                    output("ERROR \(exitCode)")
+                }
 
             }
         }

@@ -40,41 +40,62 @@ struct FSView:View {
             Button {
                 filesCollapsed.toggle()
             } label: {
-                filesCollapsed ? Image(systemName: "arrow.up") : Image(systemName: "arrow.down")
+                filesCollapsed ? Image(systemName: "arrow.down") : Image(systemName: "arrow.up")
             }
+            .buttonStyle(.borderless)
+            .help(filesCollapsed ? "Expand Files" : "Collapse Files")
 
         }
+    }
+    
+    func isDir(_ filePath:String) -> Bool {
+        var res:ObjCBool = false
+        
+        FileManager.default.fileExists(atPath: filePath,
+                                       isDirectory: &res)
+        return res.boolValue
     }
     
     var body:some View {
         
         VStack(alignment:.leading) {
            collapseControl
-            Text("\(URL(filePath: fileSelections.workingDIr).path())")
 
             if !filesCollapsed {
+                Text("\(URL(filePath: fileSelections.workingDIr).path())")
+
                     Button {
                         fileSelections.selection = URL(filePath: fileSelections.workingDIr).deletingLastPathComponent().path
                     } label: {
-                        Text("..")
+                        Text("../")
+                            .help("Move to parent directory.")
                     }
-
+                    .buttonStyle(.borderless)
                     Divider()
                 List {
                     ForEach($fileSelections.currentDirContents.wrappedValue.isEmpty ? projectWatcher.workingFiles : $fileSelections.currentDirContents.wrappedValue,
                             id:\.self) { filepath in
                         HStack {
+                            if isDir(filepath) {
+                                Image(systemName: "folder")
+                            }else {
+                                Image(systemName: "doc")
+                            }
                             Text("\(URL(filePath: filepath).lastPathComponent)")
                                 .foregroundColor(fileSelections.selectedEditorFile == filepath ? .accentColor : .primary)
                                 .onTapGesture {
                                     $fileSelections.selection.wrappedValue = filepath
                                 }
+                            
                             Button {
-                                runner.run(.openInXcode,
+                                runner.run(.open,
                                            ctx:fileSelections.selectedEditorFile)
                             } label: {
-                                Text("Xcode")
+                                Image(systemName: "square.and.arrow.up")
+                                    .fontWeight(.ultraLight)
                             }
+                            .buttonStyle(.borderless)
+                            .help("Open in extenal app.")
 
                         }
                     }
@@ -83,7 +104,6 @@ struct FSView:View {
 
             Divider()
         }
-        .padding()
         .onChange(of: project,
                   perform: { v in
             print("project changed")

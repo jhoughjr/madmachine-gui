@@ -21,6 +21,7 @@ struct SerialPortView:View {
                 } label: {
                     Text("Open Port")
                 }
+                .buttonStyle(.borderless)
                 .disabled(port.isOpen)
                 
                 Button {
@@ -28,6 +29,7 @@ struct SerialPortView:View {
                 } label: {
                     Text("close Port")
                 }
+                .buttonStyle(.borderless)
                 .disabled(!port.isOpen)
                 Button {
                     serial.lines.removeAll()
@@ -35,6 +37,7 @@ struct SerialPortView:View {
                 } label: {
                     Text("Clear")
                 }
+                .buttonStyle(.borderless)
 
             }
         }
@@ -48,8 +51,9 @@ struct SerialPortView:View {
                 Button {
                     serialCollapsed.toggle()
                 } label: {
-                    serialCollapsed ? Image(systemName: "arrow.up") : Image(systemName: "arrow.down")
+                    serialCollapsed ? Image(systemName: "arrow.down") : Image(systemName: "arrow.up")
                 }
+                .buttonStyle(.borderless)
 
             }
             if !serialCollapsed {
@@ -90,6 +94,7 @@ struct SerialPortView:View {
             }
             Divider()
         }
+        .padding()
 
     }
 }

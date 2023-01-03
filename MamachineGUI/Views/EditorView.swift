@@ -40,6 +40,7 @@ struct EditorView:View {
             } label: {
                 Text("Save")
             }
+            .buttonStyle(.borderless)
             .disabled(checksum == text.md5)
         }
     }
@@ -47,13 +48,15 @@ struct EditorView:View {
         VStack(alignment:.leading) {
             Text("Code Editor")
                 .font(.title)
-            editorCommands
-            CodeEditor(text: $text,
-                       position: $position,
-                       messages: $messages,
-                       language: .swift)
-              .environment(\.codeEditorTheme,
-                           colorScheme == .dark ? Theme.defaultDark : Theme.defaultLight)
+                CommandsView()
+                editorCommands
+                CodeEditor(text: $text,
+                           position: $position,
+                           messages: $messages,
+                           language: .swift)
+                  .environment(\.codeEditorTheme,
+                               colorScheme == .dark ? Theme.defaultDark : Theme.defaultLight)
+         
         }
         .onChange(of: fileSelections.selectedEditorFile,
                   perform: { newValue in

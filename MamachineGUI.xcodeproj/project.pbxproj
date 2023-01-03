@@ -22,6 +22,15 @@
 		D8804A8A29648FFC000AD4CF /* FileSelections.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A8929648FFC000AD4CF /* FileSelections.swift */; };
 		D8804A8C29649021000AD4CF /* ProjectWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A8B29649021000AD4CF /* ProjectWatcher.swift */; };
 		D8804A8E2964904E000AD4CF /* SerialManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A8D2964904E000AD4CF /* SerialManger.swift */; };
+		D8804A90296492BF000AD4CF /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A8F296492BF000AD4CF /* ProjectListView.swift */; };
+		D8804A92296492E1000AD4CF /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A91296492E1000AD4CF /* NewProjectView.swift */; };
+		D8804A9429649302000AD4CF /* EditProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A9329649302000AD4CF /* EditProjectView.swift */; };
+		D8804A9629649325000AD4CF /* ProjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A9529649325000AD4CF /* ProjectManager.swift */; };
+		D8804A9829649352000AD4CF /* OutputBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A9729649352000AD4CF /* OutputBuffer.swift */; };
+		D8804A9A2964937D000AD4CF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A992964937D000AD4CF /* AboutView.swift */; };
+		D8804A9C296493A6000AD4CF /* InitContextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A9B296493A6000AD4CF /* InitContextView.swift */; };
+		D8804A9E296493CD000AD4CF /* BuildContextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A9D296493CD000AD4CF /* BuildContextView.swift */; };
+		D8804AA22964943C000AD4CF /* CommandsVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804AA12964943C000AD4CF /* CommandsVIew.swift */; };
 		D8A28D03295F61B700361D85 /* ORSSerial in Frameworks */ = {isa = PBXBuildFile; productRef = D8A28D02295F61B700361D85 /* ORSSerial */; };
 		D8A28D05295F61F700361D85 /* SerialPortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A28D04295F61F700361D85 /* SerialPortView.swift */; };
 		D8A28D08295F84AC00361D85 /* CodeEditorView in Frameworks */ = {isa = PBXBuildFile; productRef = D8A28D07295F84AC00361D85 /* CodeEditorView */; };
@@ -65,6 +74,15 @@
 		D8804A8929648FFC000AD4CF /* FileSelections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSelections.swift; sourceTree = "<group>"; };
 		D8804A8B29649021000AD4CF /* ProjectWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectWatcher.swift; sourceTree = "<group>"; };
 		D8804A8D2964904E000AD4CF /* SerialManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialManger.swift; sourceTree = "<group>"; };
+		D8804A8F296492BF000AD4CF /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
+		D8804A91296492E1000AD4CF /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
+		D8804A9329649302000AD4CF /* EditProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectView.swift; sourceTree = "<group>"; };
+		D8804A9529649325000AD4CF /* ProjectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectManager.swift; sourceTree = "<group>"; };
+		D8804A9729649352000AD4CF /* OutputBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputBuffer.swift; sourceTree = "<group>"; };
+		D8804A992964937D000AD4CF /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		D8804A9B296493A6000AD4CF /* InitContextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitContextView.swift; sourceTree = "<group>"; };
+		D8804A9D296493CD000AD4CF /* BuildContextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildContextView.swift; sourceTree = "<group>"; };
+		D8804AA12964943C000AD4CF /* CommandsVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsVIew.swift; sourceTree = "<group>"; };
 		D8A28D04295F61F700361D85 /* SerialPortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialPortView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,10 +179,15 @@
 		D8804A8329648F81000AD4CF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D8804AA029649426000AD4CF /* Commands */,
+				D8804A9F296493FB000AD4CF /* Project */,
 				D805E41E295B41CA0007C402 /* ContentView.swift */,
 				D8A28D04295F61F700361D85 /* SerialPortView.swift */,
 				D8804A8429648F97000AD4CF /* EditorView.swift */,
 				D8804A8629648FCB000AD4CF /* FSView.swift */,
+				D8804A992964937D000AD4CF /* AboutView.swift */,
+				D8804A9B296493A6000AD4CF /* InitContextView.swift */,
+				D8804A9D296493CD000AD4CF /* BuildContextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -175,8 +198,28 @@
 				D8804A8929648FFC000AD4CF /* FileSelections.swift */,
 				D8804A8B29649021000AD4CF /* ProjectWatcher.swift */,
 				D8804A8D2964904E000AD4CF /* SerialManger.swift */,
+				D8804A9529649325000AD4CF /* ProjectManager.swift */,
+				D8804A9729649352000AD4CF /* OutputBuffer.swift */,
 			);
 			path = Observables;
+			sourceTree = "<group>";
+		};
+		D8804A9F296493FB000AD4CF /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				D8804A8F296492BF000AD4CF /* ProjectListView.swift */,
+				D8804A91296492E1000AD4CF /* NewProjectView.swift */,
+				D8804A9329649302000AD4CF /* EditProjectView.swift */,
+			);
+			name = Project;
+			sourceTree = "<group>";
+		};
+		D8804AA029649426000AD4CF /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				D8804AA12964943C000AD4CF /* CommandsVIew.swift */,
+			);
+			name = Commands;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,16 +366,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8804A9A2964937D000AD4CF /* AboutView.swift in Sources */,
 				D8804A8A29648FFC000AD4CF /* FileSelections.swift in Sources */,
 				D8804A8E2964904E000AD4CF /* SerialManger.swift in Sources */,
 				D8804A8229648F38000AD4CF /* Extensions.swift in Sources */,
+				D8804A9829649352000AD4CF /* OutputBuffer.swift in Sources */,
 				D805E451295B69250007C402 /* Runner.swift in Sources */,
+				D8804AA22964943C000AD4CF /* CommandsVIew.swift in Sources */,
+				D8804A9429649302000AD4CF /* EditProjectView.swift in Sources */,
+				D8804A9629649325000AD4CF /* ProjectManager.swift in Sources */,
+				D8804A9C296493A6000AD4CF /* InitContextView.swift in Sources */,
 				D805E41F295B41CA0007C402 /* ContentView.swift in Sources */,
+				D8804A90296492BF000AD4CF /* ProjectListView.swift in Sources */,
+				D8804A9E296493CD000AD4CF /* BuildContextView.swift in Sources */,
 				D8804A8529648F97000AD4CF /* EditorView.swift in Sources */,
 				D8804A8C29649021000AD4CF /* ProjectWatcher.swift in Sources */,
 				D805E41D295B41CA0007C402 /* MamachineGUIApp.swift in Sources */,
 				D8804A8729648FCC000AD4CF /* FSView.swift in Sources */,
 				D8A28D05295F61F700361D85 /* SerialPortView.swift in Sources */,
+				D8804A92296492E1000AD4CF /* NewProjectView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
