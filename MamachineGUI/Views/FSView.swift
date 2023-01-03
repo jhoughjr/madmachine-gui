@@ -38,7 +38,10 @@ struct FSView:View {
             Text("Files")
                 .font(.title)
             Button {
-                filesCollapsed.toggle()
+//                withAnimation {
+                    filesCollapsed.toggle()
+//                }
+                
             } label: {
                 filesCollapsed ? Image(systemName: "arrow.down") : Image(systemName: "arrow.up")
             }
@@ -110,6 +113,7 @@ struct FSView:View {
             if let proj = v {
                     projectWatcher.look(at:proj)
                 fileSelections.project = proj
+                fileSelections.selectedEditorFile = "\(proj.workingDir.replacingOccurrences(of: "file://", with: ""))Sources/\(proj.name)/\(proj.name).swift"
             }
         })
        

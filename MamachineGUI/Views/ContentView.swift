@@ -36,10 +36,10 @@ struct ContentView: View {
     
     @State var showingAbout = false
     @State var selectedProject:ProjectManager.Project?
-    @State var projectsCollapsed = true
-    @State var serialCollapsed = true
-    @State var outputCollapsed = true
-    @State var commandsCollapsed = true
+//    @State var projectsCollapsed = true
+//    @State var serialCollapsed = true
+//    @State var outputCollapsed = true
+//    @State var commandsCollapsed = true
     
     var pathPicker: some View {
         VStack(alignment:.leading) {
@@ -133,14 +133,14 @@ struct ContentView: View {
         VStack {
             ProjectListView(selectedProject: $selectedProject)
             SerialPortView()
-            HSplitView {
-                    FSView(project: selectedProject,
-                           projectWatcher: watcher,
-                           fileSelections: fileSelections)
-                if let p = selectedProject {
-                    EditorView(fileSelections: fileSelections,
-                               project: p)
-                }
+            FSView(project: selectedProject,
+                   projectWatcher: watcher,
+                   fileSelections: fileSelections)
+            if let p = selectedProject {
+                EditorView(fileSelections: fileSelections,
+                           project: p)
+            }else {
+                Text("Select a Project.")
             }
         }
     }
@@ -182,23 +182,23 @@ struct ContentView: View {
             case .column:
                  AnyView(columnView)
             }
-            HStack {
-                Button {
-                    withAnimation {
-                        layout = .stack
-                    }
-                    
-                } label: {
-                    Text("Stack")
-                }
-                Button {
-                    withAnimation {
-                        layout = .column
-                    }
-                } label: {
-                    Text("Column")
-                }
-            }
+//            HStack {
+//                Button {
+//                    withAnimation {
+//                        layout = .stack
+//                    }
+//                    
+//                } label: {
+//                    Text("Stack")
+//                }
+//                Button {
+//                    withAnimation {
+//                        layout = .column
+//                    }
+//                } label: {
+//                    Text("Column")
+//                }
+//            }
         }
         )
     }

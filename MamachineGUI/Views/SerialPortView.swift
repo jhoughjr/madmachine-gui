@@ -49,7 +49,10 @@ struct SerialPortView:View {
                 Text("Serial Monitor")
                     .font(.title)
                 Button {
-                    serialCollapsed.toggle()
+//                    withAnimation {
+                        serialCollapsed.toggle()
+//                    }
+                    
                 } label: {
                     serialCollapsed ? Image(systemName: "arrow.down") : Image(systemName: "arrow.up")
                 }

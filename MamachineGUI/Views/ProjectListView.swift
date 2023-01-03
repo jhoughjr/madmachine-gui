@@ -24,7 +24,9 @@ struct ProjectListView: View {
                 .font(.title)
             
             Button {
-                projectsCollapsed.toggle()
+//                withAnimation {
+                    projectsCollapsed.toggle()
+//                }
             } label: {
                 projectsCollapsed ? Image(systemName: "arrow.down") : Image(systemName: "arrow.up")
             }
