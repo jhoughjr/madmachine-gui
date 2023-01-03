@@ -129,8 +129,7 @@ struct ContentView: View {
         }
     }
     
-    var body: some View {
-        
+    var stackView: some View {
         VStack {
             ProjectListView(selectedProject: $selectedProject)
             SerialPortView()
@@ -144,5 +143,63 @@ struct ContentView: View {
                 }
             }
         }
+    }
+    
+    var columnView: some View {
+        VStack {
+            HSplitView {
+                ProjectListView(selectedProject: $selectedProject)
+                FSView(project: selectedProject,
+                       projectWatcher: watcher,
+                       fileSelections: fileSelections)
+                if let p = selectedProject {
+                    EditorView(fileSelections: fileSelections,
+                               project: p)
+                }else {
+                    Text("Select  project")
+                }
+                SerialPortView()
+                
+            }
+            Spacer()
+        }
+
+    }
+    
+    enum UILayout:Int {
+        case stack
+        case column
+    }
+    
+    @State var layout:UILayout = .stack
+    
+    var body: some View {
+        AnyView (
+        VStack {
+            switch layout {
+            case .stack :
+                 AnyView(stackView)
+            case .column:
+                 AnyView(columnView)
+            }
+            HStack {
+                Button {
+                    withAnimation {
+                        layout = .stack
+                    }
+                    
+                } label: {
+                    Text("Stack")
+                }
+                Button {
+                    withAnimation {
+                        layout = .column
+                    }
+                } label: {
+                    Text("Column")
+                }
+            }
+        }
+        )
     }
 }
