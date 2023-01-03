@@ -16,6 +16,12 @@
 		D805E43B295B41CC0007C402 /* MamachineGUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D805E43A295B41CC0007C402 /* MamachineGUIUITestsLaunchTests.swift */; };
 		D805E44F295B59B40007C402 /* FilePicker in Frameworks */ = {isa = PBXBuildFile; productRef = D805E44E295B59B40007C402 /* FilePicker */; };
 		D805E451295B69250007C402 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D805E450295B69250007C402 /* Runner.swift */; };
+		D8804A8229648F38000AD4CF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A8129648F38000AD4CF /* Extensions.swift */; };
+		D8804A8529648F97000AD4CF /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A8429648F97000AD4CF /* EditorView.swift */; };
+		D8804A8729648FCC000AD4CF /* FSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A8629648FCB000AD4CF /* FSView.swift */; };
+		D8804A8A29648FFC000AD4CF /* FileSelections.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A8929648FFC000AD4CF /* FileSelections.swift */; };
+		D8804A8C29649021000AD4CF /* ProjectWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A8B29649021000AD4CF /* ProjectWatcher.swift */; };
+		D8804A8E2964904E000AD4CF /* SerialManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8804A8D2964904E000AD4CF /* SerialManger.swift */; };
 		D8A28D03295F61B700361D85 /* ORSSerial in Frameworks */ = {isa = PBXBuildFile; productRef = D8A28D02295F61B700361D85 /* ORSSerial */; };
 		D8A28D05295F61F700361D85 /* SerialPortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A28D04295F61F700361D85 /* SerialPortView.swift */; };
 		D8A28D08295F84AC00361D85 /* CodeEditorView in Frameworks */ = {isa = PBXBuildFile; productRef = D8A28D07295F84AC00361D85 /* CodeEditorView */; };
@@ -53,6 +59,12 @@
 		D805E438295B41CC0007C402 /* MamachineGUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MamachineGUIUITests.swift; sourceTree = "<group>"; };
 		D805E43A295B41CC0007C402 /* MamachineGUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MamachineGUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D805E450295B69250007C402 /* Runner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
+		D8804A8129648F38000AD4CF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D8804A8429648F97000AD4CF /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
+		D8804A8629648FCB000AD4CF /* FSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSView.swift; sourceTree = "<group>"; };
+		D8804A8929648FFC000AD4CF /* FileSelections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSelections.swift; sourceTree = "<group>"; };
+		D8804A8B29649021000AD4CF /* ProjectWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectWatcher.swift; sourceTree = "<group>"; };
+		D8804A8D2964904E000AD4CF /* SerialManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialManger.swift; sourceTree = "<group>"; };
 		D8A28D04295F61F700361D85 /* SerialPortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialPortView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,13 +121,14 @@
 		D805E41B295B41CA0007C402 /* MamachineGUI */ = {
 			isa = PBXGroup;
 			children = (
+				D8804A8829648FE7000AD4CF /* Observables */,
+				D8804A8329648F81000AD4CF /* Views */,
 				D805E41C295B41CA0007C402 /* MamachineGUIApp.swift */,
-				D805E41E295B41CA0007C402 /* ContentView.swift */,
+				D805E450295B69250007C402 /* Runner.swift */,
+				D8804A8129648F38000AD4CF /* Extensions.swift */,
 				D805E420295B41CC0007C402 /* Assets.xcassets */,
 				D805E425295B41CC0007C402 /* MamachineGUI.entitlements */,
 				D805E422295B41CC0007C402 /* Preview Content */,
-				D805E450295B69250007C402 /* Runner.swift */,
-				D8A28D04295F61F700361D85 /* SerialPortView.swift */,
 			);
 			path = MamachineGUI;
 			sourceTree = "<group>";
@@ -143,6 +156,27 @@
 				D805E43A295B41CC0007C402 /* MamachineGUIUITestsLaunchTests.swift */,
 			);
 			path = MamachineGUIUITests;
+			sourceTree = "<group>";
+		};
+		D8804A8329648F81000AD4CF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D805E41E295B41CA0007C402 /* ContentView.swift */,
+				D8A28D04295F61F700361D85 /* SerialPortView.swift */,
+				D8804A8429648F97000AD4CF /* EditorView.swift */,
+				D8804A8629648FCB000AD4CF /* FSView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D8804A8829648FE7000AD4CF /* Observables */ = {
+			isa = PBXGroup;
+			children = (
+				D8804A8929648FFC000AD4CF /* FileSelections.swift */,
+				D8804A8B29649021000AD4CF /* ProjectWatcher.swift */,
+				D8804A8D2964904E000AD4CF /* SerialManger.swift */,
+			);
+			path = Observables;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,9 +323,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8804A8A29648FFC000AD4CF /* FileSelections.swift in Sources */,
+				D8804A8E2964904E000AD4CF /* SerialManger.swift in Sources */,
+				D8804A8229648F38000AD4CF /* Extensions.swift in Sources */,
 				D805E451295B69250007C402 /* Runner.swift in Sources */,
 				D805E41F295B41CA0007C402 /* ContentView.swift in Sources */,
+				D8804A8529648F97000AD4CF /* EditorView.swift in Sources */,
+				D8804A8C29649021000AD4CF /* ProjectWatcher.swift in Sources */,
 				D805E41D295B41CA0007C402 /* MamachineGUIApp.swift in Sources */,
+				D8804A8729648FCC000AD4CF /* FSView.swift in Sources */,
 				D8A28D05295F61F700361D85 /* SerialPortView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

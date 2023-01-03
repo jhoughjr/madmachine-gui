@@ -12,15 +12,15 @@ import SwiftSlash
 
 class Runner:ObservableObject {
 
-//    enum GitCommands:String, CaseIterable {
-//        case gitInit
-//        case clone
-//        case pull
-//        case push
-//        case add
-//        case checkout
-//        case commit
-//    }
+    enum GitCommands:String, CaseIterable {
+        case gitInit
+        case clone
+        case pull
+        case push
+        case add
+        case checkout
+        case commit
+    }
     
     enum MiscCommands:String, CaseIterable {
         case openInXcode
@@ -57,6 +57,7 @@ class Runner:ObservableObject {
                 return "Host Test"
             }
         }
+        
         var explanation:String {
             get {
                 switch self {
@@ -145,7 +146,7 @@ class Runner:ObservableObject {
     func run(_ command:MMSDKCommands = .build,
              for project:ProjectManager.Project? = nil,
              with context:[String:String]? = nil) {
-        print("running \(command) for \(project) with \(context)")
+        print("running \(command) for \(String(describing: project)) with \(String(describing: context))")
         let u = URL(string: mmsdkPath)
         let p = u!.path(percentEncoded: false)
         
