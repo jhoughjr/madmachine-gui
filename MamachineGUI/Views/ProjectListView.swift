@@ -64,8 +64,6 @@ struct ProjectListView: View {
                     
                     
                 }
-                .padding([.leading], sectionPadding)
-                
 
                     HStack {
                         ForEach(projectMan.projects,
@@ -90,17 +88,14 @@ struct ProjectListView: View {
                                 }
                                 .foregroundColor(selectedProject == project ? .yellow : .white)
                         }
-                        //                    }
                     }
 
-                .padding([.leading], sectionPadding)
             }
             else {
                 
             }
             Divider()
         }
-        .padding()
         .onAppear {
             projectMan.load()
         }

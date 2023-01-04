@@ -130,19 +130,29 @@ struct ContentView: View {
     }
     
     var stackView: some View {
-        VStack {
+        VStack(alignment:.leading) {
             ProjectListView(selectedProject: $selectedProject)
-            SerialPortView()
-            FSView(project: selectedProject,
-                   projectWatcher: watcher,
-                   fileSelections: fileSelections)
-            if let p = selectedProject {
-                EditorView(fileSelections: fileSelections,
-                           project: p)
-            }else {
-                Text("Select a Project.")
+            HStack {
+                VStack(alignment:.leading) {
+                    FSView(project: selectedProject,
+                           projectWatcher: watcher,
+                           fileSelections: fileSelections)
+                    CommandsView(project:selectedProject)
+                }
+               
+                if let p = selectedProject {
+                    EditorView(fileSelections: fileSelections,
+                               project: p)
+                }else {
+                    Text("Select a Project.")
+                    Spacer()
+                }
             }
+            SerialPortView()
+            Spacer()
         }
+        .padding([.leading],25)
+
     }
     
     var columnView: some View {
@@ -187,7 +197,7 @@ struct ContentView: View {
 //                    withAnimation {
 //                        layout = .stack
 //                    }
-//                    
+//
 //                } label: {
 //                    Text("Stack")
 //                }

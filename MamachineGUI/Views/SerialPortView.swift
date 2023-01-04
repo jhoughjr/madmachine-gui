@@ -71,7 +71,6 @@ struct SerialPortView:View {
                             }
                         buttons
                     }
-                    .padding()
                 }
                 else {
                     Text("Select serial port.")
@@ -87,17 +86,14 @@ struct SerialPortView:View {
                             }
                         }
                     }
-                    .padding()
                     .onAppear(perform: {
                         serial.selectStoredSelectedPort()
                     })
-                    .padding([.leading], 25)
                 }
                 TextEditor(text: $serial.portBuffer)
             }
             Divider()
         }
-        .padding()
 
     }
 }

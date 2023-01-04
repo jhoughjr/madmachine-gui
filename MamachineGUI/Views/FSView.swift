@@ -26,7 +26,7 @@ struct File: Identifiable { // identifiable ✓
 struct FSView:View {
     
     let manager = FileManager.default
-    var project:ProjectManager.Project? = nil
+    @State var project:ProjectManager.Project? = nil
     
     @ObservedObject var projectWatcher = ProjectWatcher()
     @ObservedObject var fileSelections:FileSelections
@@ -37,6 +37,9 @@ struct FSView:View {
         HStack {
             Text("Files")
                 .font(.title)
+            if project != nil {
+                Text("\(URL(filePath: fileSelections.selection).path())")
+            }
             Button {
 //                withAnimation {
                     filesCollapsed.toggle()
@@ -45,6 +48,7 @@ struct FSView:View {
             } label: {
                 filesCollapsed ? Image(systemName: "arrow.down") : Image(systemName: "arrow.up")
             }
+            .disabled(project == nil)
             .buttonStyle(.borderless)
             .help(filesCollapsed ? "Expand Files" : "Collapse Files")
 
@@ -59,16 +63,24 @@ struct FSView:View {
         return res.boolValue
     }
     
+    func autoSelect(for proj:ProjectManager.Project) {
+        let autoSelection = "\(proj.workingDir.replacingOccurrences(of: "file://", with: ""))Sources/\(proj.name)/\(proj.name).swift"
+        print("autoselecting for \(autoSelection)")
+
+        fileSelections.selection = autoSelection
+
+        
+    }
+    
     var body:some View {
         
         VStack(alignment:.leading) {
            collapseControl
 
             if !filesCollapsed {
-                Text("\(URL(filePath: fileSelections.workingDIr).path())")
 
                     Button {
-                        fileSelections.selection = URL(filePath: fileSelections.workingDIr).deletingLastPathComponent().path
+                        fileSelections.selection = URL(filePath: fileSelections.selection).deletingLastPathComponent().path
                     } label: {
                         Text("../")
                             .help("Move to parent directory.")
@@ -111,9 +123,9 @@ struct FSView:View {
                   perform: { v in
             print("project changed")
             if let proj = v {
-                    projectWatcher.look(at:proj)
-                fileSelections.project = proj
-                fileSelections.selectedEditorFile = "\(proj.workingDir.replacingOccurrences(of: "file://", with: ""))Sources/\(proj.name)/\(proj.name).swift"
+              autoSelect(for: proj)
+            }else {
+                fileSelections.selection = ""
             }
         })
        

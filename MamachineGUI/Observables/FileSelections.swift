@@ -12,11 +12,12 @@ class FileSelections:ObservableObject {
             workingDIr = project?.workingDir ?? ""
         }
     }
+    
     @Published var previousDirectory = ""
     
     @Published var selection = "" {
         didSet {
-            print("didSet FileSelections.selection \(selection)")
+            print("selected \(selection)")
             var isDir:ObjCBool = false
             
             let path = selection
@@ -25,14 +26,24 @@ class FileSelections:ObservableObject {
             if isDir.boolValue {
                 previousDirectory = workingDIr
                 workingDIr = path
+                print("is dir")
                 if let fs = try? FileManager.default.contentsOfDirectory(atPath: path) {
                     let foo = workingDIr.replacing("file://", with: "")
                     
                     currentDirContents = fs.map({"\(foo)/\($0)"})
                 }else {
-                    print("couldn't look")
+                    print("couldn't check")
                 }
-            }else {
+            }
+            else {
+                print("is file")
+                let url = URL(filePath: path)
+                if let fs = try? FileManager.default.contentsOfDirectory(atPath: url.deletingLastPathComponent().path()) {
+                    
+                    currentDirContents = fs
+                }else {
+                    print("couldn't check")
+                }
                 print("selected file, setting editorFIle")
                 selectedEditorFile = selection
             }

@@ -47,7 +47,6 @@ struct EditorView:View {
     var body: some View {
         VStack(alignment:.leading) {
 
-                CommandsView()
                 Text("Code Editor")
                     .font(.title)
                 editorCommands

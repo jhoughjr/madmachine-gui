@@ -11,6 +11,7 @@ struct CommandsView:View {
     @State var outputCollapsed = false
     @State var selectedProject:ProjectManager.Project?
     @State var commandsCollapsed = true
+    @State var project:ProjectManager.Project?
     
     @ObservedObject var runner = Runner()
     // shold make validation on concrete types instead
@@ -45,12 +46,17 @@ struct CommandsView:View {
             HStack {
                 Text("Output")
                     .font(.title)
-                Button {
-                    runner.clearOutput()
-                } label: {
-                    Text("Clear")
+                if !outputCollapsed {
+                    Button {
+                        runner.clearOutput()
+                    } label: {
+                        Text("Clear")
+                    }
+                    Toggle("Timestamps", isOn: $logTimestamps)
+                        .padding([.leading], 25)
+                    .buttonStyle(.borderless)
                 }
-                .buttonStyle(.borderless)
+               
                 Button {
 //                    withAnimation {
                         outputCollapsed.toggle()
@@ -82,13 +88,13 @@ struct CommandsView:View {
                 } label: {
                     commandsCollapsed ? Image(systemName: "arrow.down") : Image(systemName: "arrow.up")
                 }
+                .disabled(project == nil)
                 .buttonStyle(.borderless)
 
             }
             
             if !commandsCollapsed {
-                Toggle("Timestamps", isOn: $logTimestamps)
-                    .padding([.leading], 25)
+               
                 HStack {
                     Group {
                         
