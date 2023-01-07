@@ -52,9 +52,9 @@ struct CommandsView:View {
                 }
                 .buttonStyle(.borderless)
                 Button {
-//                    withAnimation {
+                    withAnimation {
                         outputCollapsed.toggle()
-//                    }
+                    }
                 } label: {
                     outputCollapsed ? Image(systemName: "arrow.down") : Image(systemName: "arrow.up")
                 }
@@ -104,9 +104,9 @@ struct CommandsView:View {
                 Text("MMSDK Commands")
                     .font(.title)
                 Button {
-//                    withAnimation {
+                    withAnimation {
                         commandsCollapsed.toggle()
-//                    }
+                    }
                 } label: {
                     commandsCollapsed ? Image(systemName: "arrow.down") : Image(systemName: "arrow.up")
                 }

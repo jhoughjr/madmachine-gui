@@ -24,13 +24,18 @@ struct ProjectListView: View {
                 .font(.title)
             
             Button {
-//                withAnimation {
+                withAnimation {
                     projectsCollapsed.toggle()
-//                }
+                }
             } label: {
                 projectsCollapsed ? Image(systemName: "arrow.down") : Image(systemName: "arrow.up")
             }
             .buttonStyle(.borderless)
+            if let p = selectedProject {
+                Text("\(p.name)")
+            }else {
+                Text("Select a project.")
+            }
 
         }
     }
@@ -94,9 +99,6 @@ struct ProjectListView: View {
                     }
 
                 .padding([.leading], sectionPadding)
-            }
-            else {
-                
             }
             Divider()
         }

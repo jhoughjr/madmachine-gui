@@ -38,9 +38,9 @@ struct FSView:View {
             Text("Files")
                 .font(.title)
             Button {
-//                withAnimation {
+                withAnimation {
                     filesCollapsed.toggle()
-//                }
+                }
                 
             } label: {
                 filesCollapsed ? Image(systemName: "arrow.down") : Image(systemName: "arrow.up")
@@ -48,6 +48,9 @@ struct FSView:View {
             .buttonStyle(.borderless)
             .help(filesCollapsed ? "Expand Files" : "Collapse Files")
 
+            if let f = fileSelections.selectedEditorFile {
+                Text("\(f)")
+            }
         }
     }
     
