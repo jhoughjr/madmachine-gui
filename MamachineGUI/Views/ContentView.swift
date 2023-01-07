@@ -130,18 +130,21 @@ struct ContentView: View {
     }
     
     var stackView: some View {
-        VStack {
+        VStack(alignment:.leading, spacing:0) {
             ProjectListView(selectedProject: $selectedProject)
-            SerialPortView()
             FSView(project: selectedProject,
                    projectWatcher: watcher,
                    fileSelections: fileSelections)
-            if let p = selectedProject {
-                EditorView(fileSelections: fileSelections,
-                           project: p)
-            }else {
-                Text("Select a Project.")
-            }
+            CommandsView()
+            SerialPortView()
+
+
+//            if let p = selectedProject {
+//                EditorView(fileSelections: fileSelections,
+//                           project: p)
+//            }else {
+//                Text("Select a Project.")
+//            }
         }
     }
     
@@ -152,12 +155,13 @@ struct ContentView: View {
                 FSView(project: selectedProject,
                        projectWatcher: watcher,
                        fileSelections: fileSelections)
-                if let p = selectedProject {
-                    EditorView(fileSelections: fileSelections,
-                               project: p)
-                }else {
-                    Text("Select  project")
-                }
+//                if let p = selectedProject {
+//                    EditorView(fileSelections: fileSelections,
+//                               project: p)
+//                }else {
+//                    Text("Select  project")
+//                }
+                CommandsView()
                 SerialPortView()
                 
             }
@@ -176,29 +180,9 @@ struct ContentView: View {
     var body: some View {
         AnyView (
         VStack {
-            switch layout {
-            case .stack :
-                 AnyView(stackView)
-            case .column:
-                 AnyView(columnView)
-            }
-//            HStack {
-//                Button {
-//                    withAnimation {
-//                        layout = .stack
-//                    }
-//                    
-//                } label: {
-//                    Text("Stack")
-//                }
-//                Button {
-//                    withAnimation {
-//                        layout = .column
-//                    }
-//                } label: {
-//                    Text("Column")
-//                }
-//            }
+            stackView
+            Spacer()
+
         }
         )
     }

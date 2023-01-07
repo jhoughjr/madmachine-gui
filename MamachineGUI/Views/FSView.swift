@@ -116,6 +116,7 @@ struct FSView:View {
                 fileSelections.selectedEditorFile = "\(proj.workingDir.replacingOccurrences(of: "file://", with: ""))Sources/\(proj.name)/\(proj.name).swift"
             }
         })
+        .padding([.leading],20)
        
     }
 }

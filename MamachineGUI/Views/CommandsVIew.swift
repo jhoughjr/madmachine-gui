@@ -62,6 +62,8 @@ struct CommandsView:View {
 
             }
             if !outputCollapsed {
+                Toggle("Timestamps", isOn: $logTimestamps)
+                    .padding([.leading], 25)
                 TextEditor(text:$runner.output)
                     .padding([.leading],25)
             }
@@ -70,9 +72,35 @@ struct CommandsView:View {
         
     }
     
-    var body: some View {
-        VStack(alignment:.leading) {
+    var expanded:some View {
+        VStack(alignment: .leading,
+               spacing: 0) {
+           
             HStack {
+                Group {
+                    
+                    ForEach(Runner.MMSDKCommands.allCases, id:\.self) { command in
+                        Button {
+                            runner.run(command, for: selectedProject)
+                        } label: {
+                            Text(command.label)
+                        }
+                        .buttonStyle(.borderless)
+                        .disabled(!hasContext(for: command))
+                        //
+                    }
+                }
+            }
+            outputView
+        }
+
+    }
+    
+    var body: some View {
+        VStack(alignment:.leading,
+               spacing:0) {
+            
+            HStack(alignment:.center) {
                 Text("MMSDK Commands")
                     .font(.title)
                 Button {
@@ -83,30 +111,14 @@ struct CommandsView:View {
                     commandsCollapsed ? Image(systemName: "arrow.down") : Image(systemName: "arrow.up")
                 }
                 .buttonStyle(.borderless)
-
             }
             
             if !commandsCollapsed {
-                Toggle("Timestamps", isOn: $logTimestamps)
-                    .padding([.leading], 25)
-                HStack {
-                    Group {
-                        
-                        ForEach(Runner.MMSDKCommands.allCases, id:\.self) { command in
-                            Button {
-                                runner.run(command, for: selectedProject)
-                            } label: {
-                                Text(command.label)
-                            }
-                            .buttonStyle(.borderless)
-                            .disabled(!hasContext(for: command))
-                            //
-                        }
-                    }
-                }
-                .padding([.leading], 25)
-                outputView
+              expanded
             }
+            Divider()
         }
+        .padding()
+
     }
 }
