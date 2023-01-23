@@ -189,11 +189,10 @@ class Runner:ObservableObject {
         Task {
             // display running commandline in output
             self.output(finalString)
-           
             //define the command you'd like to run
             var zfsDatasetsCommand:Command = Command(bash:finalString)
             // set its working directory
-            zfsDatasetsCommand.workingDirectory = URL(string: workingDirPath)!
+            zfsDatasetsCommand.workingDirectory = URL(string: project?.workingDir ?? "")!
             //pass the command structure to a new ProcessInterface. in this example, stdout will be parsed into lines with the lf byte, and stderr will be unparsed (raw data will be passed into the stream)
             let zfsProcessInterface = ProcessInterface(command:zfsDatasetsCommand,
                                                        stdout:.active(.lf),

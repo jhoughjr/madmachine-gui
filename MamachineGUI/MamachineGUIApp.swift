@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct MamachineGUIApp: App {
+    @ObservedObject var projectManager = ProjectManager.shared
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

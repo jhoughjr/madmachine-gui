@@ -48,6 +48,7 @@ class ProjectManager:ObservableObject {
     @AppStorage("projectList") var projectsList = Data()
     
     @Published var projects = [Project]()
+    @Published var selectedProject:Project? = nil
     
     func load() {
         if let list = try? JSONDecoder().decode([Project].self,

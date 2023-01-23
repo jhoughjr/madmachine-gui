@@ -16,7 +16,7 @@ struct EditorView:View {
     @State var checksum = ""
     
     @ObservedObject var fileSelections:FileSelections
-    @State var project:ProjectManager.Project
+    @Binding var project:ProjectManager.Project?
     
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
@@ -44,24 +44,31 @@ struct EditorView:View {
             .disabled(checksum == text.md5)
         }
     }
+    
+    var editor: some View {
+        VStack(alignment:.leading) {
+            Text("Code Editor")
+                .font(.title)
+            editorCommands
+            CodeEditor(text: $text,
+                       position: $position,
+                       messages: $messages,
+                       language: .swift)
+            .environment(\.codeEditorTheme,
+                          colorScheme == .dark ? Theme.defaultDark : Theme.defaultLight)
+            SerialPortView()
+        }
+    }
     var body: some View {
         VStack(alignment:.leading) {
-
-                CommandsView()
-                Text("Code Editor")
-                    .font(.title)
-                editorCommands
-                CodeEditor(text: $text,
-                           position: $position,
-                           messages: $messages,
-                           language: .swift)
-                  .environment(\.codeEditorTheme,
-                               colorScheme == .dark ? Theme.defaultDark : Theme.defaultLight)
+            VSplitView {
+                editor
+                CommandsView(selectedProject: $project)
+            }
          
         }
         .onChange(of: fileSelections.selectedEditorFile,
                   perform: { newValue in
-
             let path = newValue
             
             if let d = FileManager.default.contents(atPath: path) {

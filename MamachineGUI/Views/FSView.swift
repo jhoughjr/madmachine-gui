@@ -26,12 +26,12 @@ struct File: Identifiable { // identifiable ✓
 struct FSView:View {
     
     let manager = FileManager.default
-    var project:ProjectManager.Project? = nil
+    @State var project:ProjectManager.Project? = nil
     
     @ObservedObject var projectWatcher = ProjectWatcher()
     @ObservedObject var fileSelections:FileSelections
     @ObservedObject var runner = Runner()
-    @State var filesCollapsed = true
+    @State var filesCollapsed = false
     
     var collapseControl: some View {
         HStack {
@@ -40,6 +40,7 @@ struct FSView:View {
             Button {
                 withAnimation {
                     filesCollapsed.toggle()
+
                 }
                 
             } label: {
@@ -50,6 +51,7 @@ struct FSView:View {
 
             if let f = fileSelections.selectedEditorFile {
                 Text("\(f)")
+                openSelected
             }
         }
     }
@@ -62,14 +64,27 @@ struct FSView:View {
         return res.boolValue
     }
     
+    var openSelected:some View {
+        Button {
+            runner.run(.open,
+                       ctx:fileSelections.selectedEditorFile)
+        } label: {
+            Image(systemName: "square.and.arrow.up")
+                .fontWeight(.ultraLight)
+        }
+        .buttonStyle(.borderless)
+        .help("Open in extenal app.")
+    }
+    
     var body:some View {
         
         VStack(alignment:.leading) {
-           collapseControl
-
             if !filesCollapsed {
-                Text("\(URL(filePath: fileSelections.workingDIr).path())")
-
+                Text("Files")
+                    .font(.title)
+                HStack {
+                    Text("\(URL(filePath: fileSelections.workingDIr).path())")
+                    
                     Button {
                         fileSelections.selection = URL(filePath: fileSelections.workingDIr).deletingLastPathComponent().path
                     } label: {
@@ -77,7 +92,8 @@ struct FSView:View {
                             .help("Move to parent directory.")
                     }
                     .buttonStyle(.borderless)
-                    Divider()
+                }
+                Divider()
                 List {
                     ForEach($fileSelections.currentDirContents.wrappedValue.isEmpty ? projectWatcher.workingFiles : $fileSelections.currentDirContents.wrappedValue,
                             id:\.self) { filepath in
@@ -93,19 +109,13 @@ struct FSView:View {
                                     $fileSelections.selection.wrappedValue = filepath
                                 }
                             
-                            Button {
-                                runner.run(.open,
-                                           ctx:fileSelections.selectedEditorFile)
-                            } label: {
-                                Image(systemName: "square.and.arrow.up")
-                                    .fontWeight(.ultraLight)
-                            }
-                            .buttonStyle(.borderless)
-                            .help("Open in extenal app.")
+                           openSelected
 
                         }
                     }
                 }
+                .padding()
+                
             }
 
             Divider()
@@ -114,7 +124,7 @@ struct FSView:View {
                   perform: { v in
             print("project changed")
             if let proj = v {
-                    projectWatcher.look(at:proj)
+                projectWatcher.look(at:proj)
                 fileSelections.project = proj
                 fileSelections.selectedEditorFile = "\(proj.workingDir.replacingOccurrences(of: "file://", with: ""))Sources/\(proj.name)/\(proj.name).swift"
             }

@@ -8,6 +8,7 @@
 import SwiftUI
 import FilePicker
 
+
 struct InitContext {
     let name:String
     let projectType:ProjectManager.Project.ProjectType
@@ -18,10 +19,6 @@ struct InitContext {
 struct BuildContext {
     let verbose:Bool
 }
-
-
-
-
 
 struct ContentView: View {
     var sectionPadding:CGFloat = 25
@@ -36,154 +33,28 @@ struct ContentView: View {
     
     @State var showingAbout = false
     @State var selectedProject:ProjectManager.Project?
-//    @State var projectsCollapsed = true
-//    @State var serialCollapsed = true
-//    @State var outputCollapsed = true
-//    @State var commandsCollapsed = true
-    
-    var pathPicker: some View {
-        VStack(alignment:.leading) {
-            HStack {
-                Text("Active Configuration")
-                    .font(.title)
-                    .padding([.bottom], 10)
-                
-             Spacer()
-                Button {
-                    $showingAbout.wrappedValue = true
-                } label: {
-                    Image(systemName: "questionmark.bubble")
-                        .buttonStyle(PlainButtonStyle())
-                }
-                .buttonStyle(.borderless)
-                .popover(isPresented: $showingAbout,
-                         content: {AboutView()})
-
-            }
-            HStack {
-                Text("SwiftIO Project Directory")
-                    .font(.body)
-                    .fontWeight(.bold)
-                    .padding([.leading], sectionPadding)
-                Button {
-                    
-                } label: {
-                    Image(systemName: "arrow.up")
-                }
-                Button {
-                    
-                } label: {
-                    Image(systemName: "arrow.down")
-                    
-                }
-            }
-            HStack {
-                TextField("Woring Dir", text: $workingDirPath)
-                    .padding([.leading], sectionPadding)
-                FilePicker(types: [.folder],
-                           allowMultiple: true,
-                           folders: true,
-                           title: "Choose ...") {
-                    if let _ = selectedProject {
-                        
-                        selectedProject!.workingDir = $0.first?.absoluteString ?? ""
-                    
-                    }
-                    self.workingDirPath = $0.first?.absoluteString ?? ""
-                }
-            }
-            HStack {
-                Text("MadMachine SDK Directory")
-                    .font(.body )
-                    .fontWeight(.bold)
-                    .padding([.leading], sectionPadding)
-                Button {
-                    
-                } label: {
-                    Image(systemName: "arrow.up")
-                    
-                }
-                Button {
-                    
-                } label: {
-                    Image(systemName: "arrow.down")
-                    
-                }
-            }
-            HStack {
-                TextField("Madmachine SDK Dir", text: $mmsdkPath)
-                    .padding([.leading], sectionPadding)
-
-                FilePicker(types: [.folder],
-                           allowMultiple: true,
-                           folders: true,
-                           title: "Choose...") {
-                    if let _ = selectedProject {
-                        
-                        selectedProject!.mmsdk = $0.first?.absoluteString ?? ""
-                    
-                    }
-                    self.mmsdkPath = $0.first?.absoluteString ?? ""
-                }
-            }
-        }
-    }
-    
-    var stackView: some View {
-        VStack(alignment:.leading, spacing:0) {
-            ProjectListView(selectedProject: $selectedProject)
-            FSView(project: selectedProject,
-                   projectWatcher: watcher,
-                   fileSelections: fileSelections)
-            CommandsView()
-            SerialPortView()
-
-
-//            if let p = selectedProject {
-//                EditorView(fileSelections: fileSelections,
-//                           project: p)
-//            }else {
-//                Text("Select a Project.")
-//            }
-        }
-    }
-    
-    var columnView: some View {
-        VStack {
-            HSplitView {
-                ProjectListView(selectedProject: $selectedProject)
-                FSView(project: selectedProject,
-                       projectWatcher: watcher,
-                       fileSelections: fileSelections)
-//                if let p = selectedProject {
-//                    EditorView(fileSelections: fileSelections,
-//                               project: p)
-//                }else {
-//                    Text("Select  project")
-//                }
-                CommandsView()
-                SerialPortView()
-                
-            }
-            Spacer()
-        }
-
-    }
-    
-    enum UILayout:Int {
-        case stack
-        case column
-    }
-    
-    @State var layout:UILayout = .stack
     
     var body: some View {
-        AnyView (
-        VStack {
-            stackView
-            Spacer()
-
+        HSplitView {
+            if let p = selectedProject {
+                FSView(project: p,
+                       projectWatcher: watcher,
+                       fileSelections: fileSelections)
+                if fileSelections.selection.isEmpty == false {
+                    EditorView(fileSelections: fileSelections,
+                               project: $selectedProject)
+                }
+            }else {
+                ProjectListView(selectedProject: $selectedProject)
+            }
+            
         }
-        )
+        .onChange(of: selectedProject) { newValue in
+            if let p = newValue {
+                
+                watcher.look(at: p)
+                fileSelections.workingDIr = p.workingDir.replacingOccurrences(of: "file://", with: "")
+            }
+        }
     }
 }
